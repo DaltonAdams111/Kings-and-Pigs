@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c04ryytrrwgc5"]
+
+[ext_resource type="PackedScene" uid="uid://c6hy2gutwtqdj" path="res://scenes/Terrain/Platform/base_platform.tscn" id="1_7xiur"]
+[ext_resource type="Texture2D" uid="uid://b43y1qekqrtd7" path="res://assets/14-TileSets/Decorations (32x32).png" id="2_ncbbu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b2pk"]
+atlas = ExtResource("2_ncbbu")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp4da"]
+size = Vector2(32, 11)
+
+[node name="ThickPlatform" instance=ExtResource("1_7xiur")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_8b2pk")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_cp4da")

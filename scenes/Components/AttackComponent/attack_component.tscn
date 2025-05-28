@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgqwpfx18xvnh"]
+
+[ext_resource type="Script" uid="uid://c6d0slxwwh3ew" path="res://scenes/Components/AttackComponent/attack_component.gd" id="1_dytgt"]
+
+[node name="AttackComponent" type="Area2D"]
+visible = false
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_dytgt")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://f4cdxsqyf6tt"]
+
+[ext_resource type="Script" uid="uid://bcpqodl17ilnm" path="res://scenes/Player/player_ui.gd" id="1_3kx1c"]
+[ext_resource type="Texture2D" uid="uid://ctgwbvd0d8vjd" path="res://assets/12-Live and Coins/Live Bar.png" id="2_v600n"]
+[ext_resource type="PackedScene" uid="uid://behq8s0sye6k3" path="res://scenes/Player/ui_heart.tscn" id="3_78oc4"]
+
+[node name="PlayerUI" type="CanvasLayer"]
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
+script = ExtResource("1_3kx1c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+
+[node name="LifeaBar" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_v600n")
+stretch_mode = 2
+
+[node name="Hearts" type="Node2D" parent="."]
+
+[node name="UIHeart1" parent="Hearts" instance=ExtResource("3_78oc4")]
+position = Vector2(26, 21)
+
+[node name="UIHeart2" parent="Hearts" instance=ExtResource("3_78oc4")]
+position = Vector2(37, 21)
+
+[node name="UIHeart3" parent="Hearts" instance=ExtResource("3_78oc4")]
+position = Vector2(48, 21)

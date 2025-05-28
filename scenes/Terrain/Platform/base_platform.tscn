@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6hy2gutwtqdj"]
+
+[ext_resource type="Script" uid="uid://c5rwvtqrau50e" path="res://scenes/Terrain/Platform/base_platform.gd" id="1_rlqej"]
+
+[node name="BasePlatform" type="StaticBody2D"]
+collision_layer = 4096
+collision_mask = 0
+script = ExtResource("1_rlqej")
+collision_layers = 4096
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
