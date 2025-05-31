@@ -1,5 +1,4 @@
-extends Node2D
-class_name Game
+extends Node
 
 
 @onready var level_group: Node2D = $LevelGroup
@@ -23,7 +22,6 @@ func level_transition(new_level_path: String):
 	var new_level: Level = load(new_level_path).instantiate()
 	current_level = new_level
 	
-	current_level.game = self
 	current_level.player = player
 	level_group.add_child(current_level)
 	current_level.spawn_player()
@@ -35,4 +33,3 @@ func load_player():
 	
 	player = load(PLAYER_SCENE_PATH).instantiate()
 	player_group.add_child(player)
-	player.game = self

@@ -4,7 +4,6 @@ class_name Level
 
 @export var spawn_door: Door
 
-var game: Game
 var player: Player
 
 

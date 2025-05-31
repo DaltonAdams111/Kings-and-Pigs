@@ -11,11 +11,15 @@ config_version=5
 [application]
 
 config/name="Kings and Pigs"
-run/main_scene="uid://d20dpi7eacbwb"
+run/main_scene="uid://c2ppjcmr5tf0t"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/image="uid://bvjnjgb7ausfa"
 config/icon="uid://coyoe2aj3pu1j"
 boot_splash/minimum_display_time=10
+
+[autoload]
+
+Game="*res://scenes/Game/game.tscn"
 
 [display]
 

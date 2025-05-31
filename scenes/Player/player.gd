@@ -19,7 +19,7 @@ class_name  Player
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var attack_component: AttackComponent = $AttackComponent
 
-var game: Game
+@export var enter_door_states: Array[State]
 
 
 const SPRITE_OFFSET_X: float = 7.0
@@ -57,33 +57,7 @@ func _physics_process(delta: float) -> void:
 	can_jump = is_on_floor()
 	is_falling = not is_on_floor() and velocity.y > 0
 	is_holding_jump = Input.is_action_pressed("jump")
-	can_enter_door = is_on_floor()
-
-
-func _input(event: InputEvent) -> void:
-	if not event.is_action_pressed("enter_door"):
-		return
-	
-	if not door_ray_cast.is_colliding():
-		return
-	
-	if not can_enter_door:
-		return
-	
-	var door: Door = door_ray_cast.get_collider()
-	if not door.target_level_path:
-		return
-	
-	door.open_door()
-	
-	velocity = Vector2.ZERO
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", door.global_position, 0.25)
-	
-	state_machine.change_state("doorin")
-	await animation_player.animation_finished
-	
-	game.level_transition(door.target_level_path)
+	can_enter_door = is_on_floor() and state_machine.current_state in enter_door_states
 
 
 func decelerate(delta: float):

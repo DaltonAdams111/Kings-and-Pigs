@@ -22,9 +22,9 @@
 [ext_resource type="Script" uid="uid://dhahsuobqehrf" path="res://scenes/Player/land_state.gd" id="19_aciub"]
 [ext_resource type="Script" uid="uid://v7r3rvwx2oda" path="res://scenes/Player/hit_state.gd" id="20_hk2ix"]
 [ext_resource type="Script" uid="uid://m6231o8sbxah" path="res://scenes/Player/dead_state.gd" id="21_43ckd"]
-[ext_resource type="Script" uid="uid://cnbbrmklfm6pf" path="res://scenes/Player/door_state.gd" id="22_cctgl"]
+[ext_resource type="Script" uid="uid://cnbbrmklfm6pf" path="res://scenes/Player/door_in_state.gd" id="23_o05ft"]
 [ext_resource type="PackedScene" uid="uid://iex0slioqmu3" path="res://scenes/Components/HealthComponent/health_component.tscn" id="24_hxkm2"]
-[ext_resource type="Script" uid="uid://but35qs2dahuc" path="res://scenes/Player/node.gd" id="24_o05ft"]
+[ext_resource type="Script" uid="uid://but35qs2dahuc" path="res://scenes/Player/door_out_state.gd" id="24_nbg44"]
 [ext_resource type="PackedScene" uid="uid://bnbatr7lw83tv" path="res://scenes/Components/HurtboxComponent/hurtbox_component.tscn" id="25_18ciy"]
 [ext_resource type="PackedScene" uid="uid://cgqwpfx18xvnh" path="res://scenes/Components/AttackComponent/attack_component.tscn" id="26_cg2hl"]
 
@@ -904,9 +904,10 @@ height = 24.0
 radius = 14.0
 height = 45.0
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("enter_door_states") groups=["Player"]]
 collision_mask = 4368
 script = ExtResource("1_cctgl")
+enter_door_states = [NodePath("StateMachine/Idle"), NodePath("StateMachine/Run")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jxtnq")
@@ -1002,12 +1003,12 @@ player = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="DoorIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_player")]
-script = ExtResource("22_cctgl")
+script = ExtResource("23_o05ft")
 player = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="DoorOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_player")]
-script = ExtResource("24_o05ft")
+script = ExtResource("24_nbg44")
 player = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
