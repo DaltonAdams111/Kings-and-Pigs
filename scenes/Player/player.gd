@@ -5,8 +5,6 @@ class_name  Player
 ## Player
 
 
-signal door_entered(door: Door)
-
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $AttackComponent/CollisionShape2D
 @onready var floor_ray_cast: RayCast2D = $FloorRayCast
@@ -14,12 +12,14 @@ signal door_entered(door: Door)
 @onready var player_camera: PlayerCamera = $PlayerCamera
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var player_ui: CanvasLayer = $PlayerUI
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var attack_component: AttackComponent = $AttackComponent
+
+var game: Game
 
 
 const SPRITE_OFFSET_X: float = 7.0
@@ -44,7 +44,6 @@ var can_jump: bool = false
 var is_falling: bool = false
 var is_holding_jump: bool = false
 var can_enter_door: bool = false
-var door: Door = null
 
 
 func _process(_delta: float) -> void:
@@ -59,26 +58,32 @@ func _physics_process(delta: float) -> void:
 	is_falling = not is_on_floor() and velocity.y > 0
 	is_holding_jump = Input.is_action_pressed("jump")
 	can_enter_door = is_on_floor()
-	door = door_ray_cast.get_collider()
 
 
 func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("enter_door"):
 		return
 	
-	if not door:
-		return
-	
-	if not door.target_level_path:
+	if not door_ray_cast.is_colliding():
 		return
 	
 	if not can_enter_door:
 		return
 	
-	velocity = Vector2.ZERO
-	global_position = door.global_position
+	var door: Door = door_ray_cast.get_collider()
+	if not door.target_level_path:
+		return
+	
 	door.open_door()
+	
+	velocity = Vector2.ZERO
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", door.global_position, 0.25)
+	
 	state_machine.change_state("doorin")
+	await animation_player.animation_finished
+	
+	game.level_transition(door.target_level_path)
 
 
 func decelerate(delta: float):
@@ -134,7 +139,3 @@ func can_fall_through_platform() -> bool:
 		return false
 	
 	return true
-
-
-func player_entered_door():
-	door_entered.emit(door)

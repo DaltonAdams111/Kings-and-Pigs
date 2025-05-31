@@ -35,7 +35,4 @@ func load_player():
 	
 	player = load(PLAYER_SCENE_PATH).instantiate()
 	player_group.add_child(player)
-	
-
-
-	
+	player.game = self
