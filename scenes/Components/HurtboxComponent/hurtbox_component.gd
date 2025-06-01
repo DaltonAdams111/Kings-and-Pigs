@@ -5,14 +5,14 @@ class_name HurtboxComponent
 ## Component that manages the hit collision of an object.
 
 
-## Emitted when an [AttackComponent] collides with this [member HurtboxComponent].
+## Emitted when an [AttackComponent] collides with this [HurtboxComponent].
 signal hit(damage_amount: int)
 
 @export_group("Collision", "collision")
-## The physics layers this [member HurtboxComponent] is on.
+## The physics layers this [HurtboxComponent] is on.
 @export_flags_2d_physics var collision_layers: int
 
-## The physics layers this [member HurtboxComponent] checks for.
+## The physics layers this [HurtboxComponent] checks for.
 @export_flags_2d_physics var collision_masks: int
 
 
@@ -26,5 +26,4 @@ func _ready() -> void:
 
 func _on_area_entered(area) -> void:
 	if area is AttackComponent:
-		var attack: AttackComponent = area
-		hit.emit(attack.attack_damage)
+		hit.emit(area.attack_damage)

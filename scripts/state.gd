@@ -2,6 +2,9 @@ extends Node
 class_name State
 
 
+## State
+
+
 @warning_ignore("unused_signal")
 signal change_state(new_state_name: String)
 

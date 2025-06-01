@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name  Player
 
 
-## Player
+## Player Character
 
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -15,10 +15,16 @@ class_name  Player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
+## [InventoryComponent] for managing the player's inventory.
+@onready var inventory_component: InventoryComponent = $InventoryComponent
+## [HealthComponent] for managing the player's health.
 @onready var health_component: HealthComponent = $HealthComponent
+## [HurtboxComponent] for detecting collisions from attacks and updating the player's [member health_component].
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+## [AttackComponent] for defining the player's attack area and attack damage.
 @onready var attack_component: AttackComponent = $AttackComponent
 
+## Valid [State](s) that the player can enter doors from.
 @export var enter_door_states: Array[State]
 
 

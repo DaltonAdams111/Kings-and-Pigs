@@ -2,15 +2,16 @@ extends Area2D
 class_name Door
 
 
+## Door that allows traveling from one level to another.
+
+
+## The path of the level scene this [Door] leads to.
 @export var target_level_path: String
 
-@onready var player: Player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+## Timer that calls [method close_door] once the timer times out.
 @onready var door_open_timer: Timer = $DoorOpenTimer
-
-
-func _ready() -> void:
-	player = get_tree().get_first_node_in_group("Player")
 
 
 func _input(event: InputEvent) -> void:
@@ -19,6 +20,8 @@ func _input(event: InputEvent) -> void:
 	
 	if not event.is_action_pressed("enter_door"):
 		return
+	
+	var player: Player = Game.get_player()
 	
 	if not player in get_overlapping_bodies():
 		return
@@ -38,11 +41,13 @@ func _input(event: InputEvent) -> void:
 	Game.level_transition(target_level_path)
 
 
+## Plays the [Door]'s "opening" animation and starts its [member door_open_timer].
 func open_door():
 	animation_player.play("opening")
 	door_open_timer.start()
 
 
+## Plays the [Door]'s "closing" animation and queues the "idle" animation.
 func close_door():
 	animation_player.play("closing")
 	animation_player.queue("idle")

@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://ijvfj6qr058b"]
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://ijvfj6qr058b"]
 
 [ext_resource type="Texture2D" uid="uid://bih7njq8fdt7l" path="res://assets/14-TileSets/Terrain (32x32).png" id="1_1lckd"]
 [ext_resource type="Texture2D" uid="uid://b43y1qekqrtd7" path="res://assets/14-TileSets/Decorations (32x32).png" id="2_mkbxu"]
 [ext_resource type="PackedScene" uid="uid://ppvit3sesljf" path="res://scenes/Terrain/Platform/thin_platform.tscn" id="3_mkbxu"]
 [ext_resource type="PackedScene" uid="uid://c04ryytrrwgc5" path="res://scenes/Terrain/Platform/thick_platform.tscn" id="4_udjux"]
 [ext_resource type="PackedScene" uid="uid://do5rw3dy4eajb" path="res://scenes/Enemies/TestObject/test_object.tscn" id="5_3ekrg"]
+[ext_resource type="PackedScene" uid="uid://bo2suw2uw4hsk" path="res://scenes/Collectables/Heart/collectable_heart.tscn" id="6_0jync"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
 resource_name = "Terrain"
@@ -777,6 +778,10 @@ scenes/2/scene = ExtResource("4_udjux")
 resource_name = "Objects"
 scenes/1/scene = ExtResource("5_3ekrg")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f7ueb"]
+resource_name = "Collectables"
+scenes/1/scene = ExtResource("6_0jync")
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 4096
@@ -790,3 +795,4 @@ sources/0 = SubResource("TileSetAtlasSource_p57ef")
 sources/1 = SubResource("TileSetAtlasSource_u5sy4")
 sources/2 = SubResource("TileSetScenesCollectionSource_udjux")
 sources/3 = SubResource("TileSetScenesCollectionSource_0jync")
+sources/4 = SubResource("TileSetScenesCollectionSource_f7ueb")

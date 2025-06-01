@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dotsckgm5p6fr"]
+[gd_scene load_steps=44 format=3 uid="uid://dotsckgm5p6fr"]
 
 [ext_resource type="Script" uid="uid://dn5ppogba311l" path="res://scenes/Player/player.gd" id="1_cctgl"]
 [ext_resource type="Texture2D" uid="uid://b2m60hxv2by5f" path="res://assets/01-King Human/Idle (78x58).png" id="2_jxtnq"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://but35qs2dahuc" path="res://scenes/Player/door_out_state.gd" id="24_nbg44"]
 [ext_resource type="PackedScene" uid="uid://bnbatr7lw83tv" path="res://scenes/Components/HurtboxComponent/hurtbox_component.tscn" id="25_18ciy"]
 [ext_resource type="PackedScene" uid="uid://cgqwpfx18xvnh" path="res://scenes/Components/AttackComponent/attack_component.tscn" id="26_cg2hl"]
+[ext_resource type="PackedScene" uid="uid://6qvhtwtw8s0i" path="res://scenes/Components/InventoryComponent/inventory_component.tscn" id="28_nbg44"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 8.0
@@ -1011,6 +1012,8 @@ animation_player = NodePath("../../AnimationPlayer")
 script = ExtResource("24_nbg44")
 player = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
+
+[node name="InventoryComponent" parent="." instance=ExtResource("28_nbg44")]
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("24_hxkm2")]
 hurtbox = NodePath("../HurtboxComponent")
