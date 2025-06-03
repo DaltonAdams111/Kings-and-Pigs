@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://db8uvru15k421"]
 
 [ext_resource type="Script" uid="uid://dwtd5bd5dc28b" path="res://scenes/Levels/BaseLevel/level.gd" id="1_byklb"]
-[ext_resource type="TileSet" uid="uid://ijvfj6qr058b" path="res://resources/game_tileset.tres" id="2_muv8p"]
+[ext_resource type="TileSet" uid="uid://ijvfj6qr058b" path="res://resources/Tilesets/game_tileset.tres" id="2_muv8p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_muv8p"]
 

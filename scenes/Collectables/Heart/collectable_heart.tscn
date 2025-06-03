@@ -90,11 +90,8 @@ autoplay = "idle"
 offset = Vector2(-2, -6)
 
 [node name="CollectableComponent" parent="." instance=ExtResource("2_x8j4o")]
-item_type = 2
 collision_masks = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_6x5uc")
-
-[connection signal="collected" from="CollectableComponent" to="." method="_on_collectable_component_collected"]
