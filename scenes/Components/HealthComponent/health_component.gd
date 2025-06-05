@@ -47,5 +47,5 @@ func damage(damage_amount: int) -> void:
 ## adding the [param heal_amount] to the [member current_health].[br][br]
 ## Will not damage if a negative value is provided; see [method damage] instead.
 func heal(heal_amount: int) -> void:
-	var adjusted_heal: int = heal_amount if heal_amount > 0 else 0
+	var adjusted_heal: int = clampi(heal_amount, 0, absi(heal_amount))
 	current_health += adjusted_heal

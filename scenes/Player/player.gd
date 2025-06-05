@@ -52,6 +52,12 @@ var is_holding_jump: bool = false
 var can_enter_door: bool = false
 
 
+func _ready() -> void:
+	print(inventory_component.inventory.map(func(slot: ItemSlot): return slot.item.name))
+	inventory_component.consolidate_items()
+	print(inventory_component.inventory.map(func(slot: ItemSlot): return slot.item.name))
+
+
 func _process(_delta: float) -> void:
 	move_and_slide()
 
@@ -86,7 +92,7 @@ func move(delta: float, flip_sprite: bool = false) -> void:
 		return
 	
 	var opposite_direction: bool = direction and velocity.x != 0 and sign(direction) != sign(velocity.x)
-	var acceleration_multiplier: float = 2 if (opposite_direction and is_on_floor()) else 1
+	var acceleration_multiplier: float = 2.0 if (opposite_direction and is_on_floor()) else 1.0
 	
 	velocity.x = move_toward(velocity.x, MOVEMENT_SPEED * direction, ACCELERATION * delta * acceleration_multiplier)
 	

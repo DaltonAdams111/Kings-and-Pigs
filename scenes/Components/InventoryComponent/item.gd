@@ -1,3 +1,4 @@
+@tool
 extends Resource
 class_name Item
 
@@ -6,11 +7,19 @@ class_name Item
 
 
 ## The name of this [Item].
-@export var item_name: String
+@export var name: String = ""
+
+##
+@export var is_stackable: bool = false:
+	set(value):
+		is_stackable = value
+		notify_property_list_changed()
+
 ## The corresponding scene for this [Item].
-@export var item_scene: PackedScene = null
+@export var scene: PackedScene = null
 
 
-func _init(name: String = "", scene: PackedScene = null) -> void:
-	item_name = name
-	item_scene = scene
+func _init(item_name: String = "", item_is_stackable: bool = false, item_scene: PackedScene = null) -> void:
+	name = item_name
+	is_stackable = item_is_stackable
+	scene = item_scene
