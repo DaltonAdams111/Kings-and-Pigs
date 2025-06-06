@@ -8,6 +8,13 @@ class_name HurtboxComponent
 ## Emitted when an [AttackComponent] collides with this [HurtboxComponent].
 signal hit(damage_amount: int)
 
+@onready var invulnerable_timer: Timer = $InvulnerableTimer
+
+## The number of seconds this [HurtboxComponent] will be invulnerable after being hit.
+@export var invulnerable_time_sec: float = 0.0
+
+var can_take_damage: bool = true
+
 @export_group("Collision", "collision")
 ## The physics layers this [HurtboxComponent] is on.
 @export_flags_2d_physics var collision_layers: int
@@ -25,5 +32,11 @@ func _ready() -> void:
 
 
 func _on_area_entered(area) -> void:
-	if area is AttackComponent:
+	if area is AttackComponent and can_take_damage:
 		hit.emit(area.attack_damage)
+		can_take_damage = false
+		invulnerable_timer.start(invulnerable_time_sec)
+
+
+func _on_invulnerable_timer_timeout() -> void:
+	can_take_damage = true

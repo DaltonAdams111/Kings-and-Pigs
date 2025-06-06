@@ -7,7 +7,6 @@ class_name InventoryComponent
 
 ## Emitted when [ItemSlot]s are added or removed from the [member inventory]
 ## or when any of its [ItemSlot]s properties change.
-@warning_ignore("unused_signal")
 signal inventory_changed
 
 ## Array containing [ItemSlot]s which hold [Item] data.
@@ -25,7 +24,7 @@ func has_item_name(item_name: String) -> bool:
 
 
 ## Searches the [member inventory] for the provided [Item], returning the [ItemSlot] containing
-## the [Item]. If the item was not found, returns [code]null[/code].
+## the [Item]. Returns [code]null[/code] if the [param item] was not found.
 func find_item(item: Item) -> ItemSlot:
 	var index: int = find_item_index(item, inventory)
 	if index == -1:
@@ -41,7 +40,7 @@ static func find_item_index(item: Item, some_inventory: Array[ItemSlot]) -> int:
 
 
 ## Searches the [member inventory] for the provided [Item] name, returning the [ItemSlot] containing
-## the [Item]. If the item was not found, returns [code]null[/code].
+## the [Item]. Returns [code]null[/code] if the [param item_name] was not found.
 func find_item_name(item_name: String) -> ItemSlot:
 	var index: int = find_item_name_index(item_name, inventory)
 	if index == -1:

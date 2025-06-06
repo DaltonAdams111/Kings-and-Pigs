@@ -1,0 +1,114 @@
+[gd_scene load_steps=17 format=3 uid="uid://b6ooua07jdsfx"]
+
+[ext_resource type="PackedScene" uid="uid://bm4esfxb638un" path="res://scenes/Components/CollectableComponent/collectable_component.tscn" id="1_qnxnv"]
+[ext_resource type="Script" uid="uid://dvsodlnuqcgnn" path="res://scenes/Collectables/Diamond/collectable_diamond.gd" id="1_sg2ap"]
+[ext_resource type="Texture2D" uid="uid://deoo1epa3h07c" path="res://assets/12-Live and Coins/Big Diamond Idle (18x14).png" id="2_0jspg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jfbau"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdudl"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(0, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iofbj"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(18, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur2kl"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(36, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46q3e"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(54, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_238k7"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(72, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrjf0"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(90, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii0nm"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(108, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3oqr"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(126, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5y5c"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(144, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nitau"]
+atlas = ExtResource("2_0jspg")
+region = Rect2(162, 0, 18, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sg2ap"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdudl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iofbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur2kl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46q3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_238k7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrjf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii0nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3oqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5y5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nitau")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ge4n"]
+radius = 6.0
+
+[node name="CollectableDiamond" type="RigidBody2D"]
+collision_layer = 8192
+collision_mask = 4096
+script = ExtResource("1_sg2ap")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_jfbau")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -5)
+sprite_frames = SubResource("SpriteFrames_sg2ap")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.392285
+
+[node name="CollectableComponent" parent="." instance=ExtResource("1_qnxnv")]
+collision_masks = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_8ge4n")
+
+[connection signal="collected" from="CollectableComponent" to="." method="_on_collectable_component_collected"]

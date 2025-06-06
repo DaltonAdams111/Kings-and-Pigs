@@ -39,6 +39,7 @@ hurtbox = NodePath("../HurtboxComponent")
 MAX_HEALTH = 5
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("3_tdhc8")]
+invulnerable_time_sec = 2.0
 collision_layers = 1024
 collision_masks = 546
 

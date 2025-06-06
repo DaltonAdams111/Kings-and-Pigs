@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://diwu3xd13q24r"]
+
+[ext_resource type="PackedScene" uid="uid://b6ooua07jdsfx" path="res://scenes/Collectables/Diamond/collectable_diamond.tscn" id="1_woo4n"]
+[ext_resource type="Script" uid="uid://ch4dqx37fiqlt" path="res://scenes/Components/InventoryComponent/item.gd" id="2_esd0d"]
+
+[resource]
+script = ExtResource("2_esd0d")
+name = "Diamond"
+is_stackable = true
+scene = ExtResource("1_woo4n")
+metadata/_custom_type_script = "uid://ch4dqx37fiqlt"

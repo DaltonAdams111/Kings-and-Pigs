@@ -87,6 +87,7 @@ shape = SubResource("CircleShape2D_3yqx4")
 sprite_frames = SubResource("SpriteFrames_6q2xy")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.582976
 offset = Vector2(-2, -6)
 
 [node name="CollectableComponent" parent="." instance=ExtResource("2_x8j4o")]
@@ -95,3 +96,5 @@ collision_masks = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_6x5uc")
+
+[connection signal="collected" from="CollectableComponent" to="." method="_on_collectable_component_collected"]

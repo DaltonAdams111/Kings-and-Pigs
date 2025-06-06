@@ -11,7 +11,7 @@ class_name  Player
 @onready var door_ray_cast: RayCast2D = $DoorRayCast
 @onready var player_camera: PlayerCamera = $PlayerCamera
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
-@onready var player_ui: CanvasLayer = $PlayerUI
+@onready var player_ui: PlayerUI = $PlayerUI
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: PlayerStateMachine = $StateMachine
 
@@ -53,9 +53,9 @@ var can_enter_door: bool = false
 
 
 func _ready() -> void:
-	print(inventory_component.inventory.map(func(slot: ItemSlot): return slot.item.name))
-	inventory_component.consolidate_items()
-	print(inventory_component.inventory.map(func(slot: ItemSlot): return slot.item.name))
+	health_component.damage(1)
+	health_component.damage(1)
+	health_component.damage(1)
 
 
 func _process(_delta: float) -> void:
@@ -125,3 +125,17 @@ func can_fall_through_platform() -> bool:
 		return false
 	
 	return true
+
+
+func _on_health_component_health_changed(new_health: int) -> void:
+	player_ui.update_hearts(new_health)
+
+
+func _on_inventory_component_inventory_changed() -> void:
+	for slot in inventory_component.inventory:
+		print("%s_%d: %d"%[slot.item.name, inventory_component.inventory.find(slot), slot.item_count])
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("test_action"):
+		health_component.damage(1)
