@@ -6,7 +6,7 @@ class_name Door
 
 
 ## The path of the level scene this [Door] leads to.
-@export var target_level_path: String
+@export var target_level_path: String = ""
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

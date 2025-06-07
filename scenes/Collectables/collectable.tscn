@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqyp6le4hgtlr"]
+
+[ext_resource type="Script" uid="uid://cfgbe0uxbv0kn" path="res://scenes/Collectables/collectable.gd" id="1_es1ff"]
+[ext_resource type="PackedScene" uid="uid://bm4esfxb638un" path="res://scenes/Components/CollectableComponent/collectable_component.tscn" id="1_savfg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_es1ff"]
+friction = 0.5
+bounce = 0.5
+
+[node name="Collectable" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_es1ff")
+gravity_scale = 0.8
+continuous_cd = 1
+script = ExtResource("1_es1ff")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollectableComponent" parent="." instance=ExtResource("1_savfg")]
+
+[connection signal="collected" from="CollectableComponent" to="." method="_on_collectable_component_collected"]

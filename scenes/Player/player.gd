@@ -35,7 +35,7 @@ const ATTACK_AREA_POSITION_X: float = 32.0
 const MOVEMENT_SPEED: float = 150.0
 const ACCELERATION: float = 750.0
 const DECELERATION: float = 700.0
-const JUMP_VELOCITY: float = 175.0
+const JUMP_VELOCITY: float = 225.0
 var direction: float = 0.0
 
 const ATTACK_COOLDOWN: float = 0.4
@@ -84,7 +84,7 @@ func decelerate(delta: float):
 
 func move(delta: float, flip_sprite: bool = false) -> void:
 	if can_fall_through_platform() and Input.is_action_pressed("move_down"):
-		position.y += 1
+		position.y += 1.5
 	
 	direction = Input.get_axis("move_left", "move_right")
 	
@@ -138,4 +138,4 @@ func _on_inventory_component_inventory_changed() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test_action"):
-		health_component.damage(1)
+		inventory_component.spawn_items(inventory_component.find_item_name("Diamond").item, global_position, 1)

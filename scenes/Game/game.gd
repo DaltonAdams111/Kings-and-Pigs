@@ -12,7 +12,7 @@ var player: Player = null
 
 func _ready() -> void:
 	load_player()
-	level_transition("res://scenes/Levels/level_test.tscn")
+	level_transition("res://scenes/Levels/LevelTest/level_test.tscn")
 
 
 func level_transition(new_level_path: String):

@@ -23,7 +23,7 @@ func update(_delta: float) -> void:
 
 
 func physics_update(delta: float) -> void:
-	var additional_jump_velocity: float = -7.5 if player.is_holding_jump else 3.75
+	var additional_jump_velocity: float = -5.0 if player.is_holding_jump else 5.0
 	player.velocity.y += additional_jump_velocity
 	player.apply_gravity(delta)
 	player.move(delta, can_flip_sprite)

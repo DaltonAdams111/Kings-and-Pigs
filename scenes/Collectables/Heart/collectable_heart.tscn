@@ -1,100 +1,100 @@
-[gd_scene load_steps=15 format=3 uid="uid://bo2suw2uw4hsk"]
+[gd_scene load_steps=15 format=3 uid="uid://ow1vu2n73wa6"]
 
+[ext_resource type="PackedScene" uid="uid://dqyp6le4hgtlr" path="res://scenes/Collectables/collectable.tscn" id="1_dum2c"]
 [ext_resource type="Texture2D" uid="uid://dasguwto7ifd7" path="res://assets/12-Live and Coins/Big Heart Idle (18x14).png" id="1_mpeat"]
-[ext_resource type="Script" uid="uid://cx7rg3jx5deik" path="res://scenes/Collectables/Heart/collectable_heart.gd" id="1_x8j4o"]
-[ext_resource type="PackedScene" uid="uid://bm4esfxb638un" path="res://scenes/Components/CollectableComponent/collectable_component.tscn" id="2_x8j4o"]
+[ext_resource type="Script" uid="uid://bcqi5lguhdtej" path="res://scenes/Collectables/Heart/collectable_heart.gd" id="1_x8j4o"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3yqx4"]
-radius = 6.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpeat"]
+radius = 8.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3yqx4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8j4o"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(0, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6x5uc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_myecy"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(18, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ymdb3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrq82"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(36, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_78b1p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb6g2"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(54, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i4q56"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mrqc"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(72, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_djux7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4th1x"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(90, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tfrmg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtn8s"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(108, 0, 18, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4kx1i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sliqy"]
 atlas = ExtResource("1_mpeat")
 region = Rect2(126, 0, 18, 14)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6q2xy"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_x8j4o"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3yqx4")
+"texture": SubResource("AtlasTexture_x8j4o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6x5uc")
+"texture": SubResource("AtlasTexture_myecy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ymdb3")
+"texture": SubResource("AtlasTexture_qrq82")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_78b1p")
+"texture": SubResource("AtlasTexture_eb6g2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i4q56")
+"texture": SubResource("AtlasTexture_2mrqc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_djux7")
+"texture": SubResource("AtlasTexture_4th1x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tfrmg")
+"texture": SubResource("AtlasTexture_vtn8s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4kx1i")
+"texture": SubResource("AtlasTexture_sliqy")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6x5uc"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8j4o"]
 radius = 6.0
 
-[node name="CollectableHeart" type="RigidBody2D"]
+[node name="CollectableHeart" instance=ExtResource("1_dum2c")]
 collision_layer = 8192
 collision_mask = 4096
+lock_rotation = true
 script = ExtResource("1_x8j4o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_3yqx4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_mpeat")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_6q2xy")
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(-2, -8)
+sprite_frames = SubResource("SpriteFrames_x8j4o")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.582976
-offset = Vector2(-2, -6)
 
-[node name="CollectableComponent" parent="." instance=ExtResource("2_x8j4o")]
+[node name="CollectableComponent" parent="." index="2"]
 collision_masks = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_6x5uc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent" index="0"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_x8j4o")
 
-[connection signal="collected" from="CollectableComponent" to="." method="_on_collectable_component_collected"]
+[connection signal="collected" from="." to="." method="_on_collected"]

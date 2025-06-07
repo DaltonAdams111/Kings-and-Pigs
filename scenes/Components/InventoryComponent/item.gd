@@ -16,10 +16,10 @@ class_name Item
 		notify_property_list_changed()
 
 ## The corresponding scene for this [Item].
-@export var scene: PackedScene = null
+@export var scene_path: String = ""
 
 
-func _init(item_name: String = "", item_is_stackable: bool = false, item_scene: PackedScene = null) -> void:
+func _init(item_name: String = "", item_is_stackable: bool = false, item_scene_path: String = "") -> void:
 	name = item_name
 	is_stackable = item_is_stackable
-	scene = item_scene
+	scene_path = item_scene_path

@@ -17,9 +17,14 @@ signal item_changed(new_item: Item, new_count: int)
 			item = new_item
 			item_changed.emit(item, item_count)
 		
-		if item:
+		if not item:
+			return
+		
+		if not item.property_list_changed.is_connected(notify_property_list_changed):
 			item.property_list_changed.connect(notify_property_list_changed)
+		
 		notify_property_list_changed()
+
 
 ## The quantity of this [member item] this [ItemSlot] contains.
 var item_count: int = 1:
@@ -45,6 +50,22 @@ func add_items(quantity: int) -> void:
 ## Will not increase the [member item_count] if a negative value is provided, see [method add_items] instead.
 func remove_items(quantity: int) -> void:
 	item_count -= quantity
+
+
+## Spawns this [ItemSlot]'s [member item] into the world.
+func spawn_item(position: Vector2) -> void:
+	if not item.scene_path:
+		return
+	
+	if not item_count:
+		return
+	
+	var child_item: Node = load(item.scene_path).instantiate()
+	randomize()
+	var velocity: Vector2 = (Vector2.UP * 200).rotated(randf_range(-0.5, 0.5))
+	child_item.linear_velocity = velocity
+	Game.current_level.add_collectable(child_item, (position + Vector2(0, -25)))
+	item_count -= 1
 
 
 #region Custom Property List

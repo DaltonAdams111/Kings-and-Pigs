@@ -23,7 +23,7 @@ func has_item_name(item_name: String) -> bool:
 	return inventory.any(func(item_slot: ItemSlot): return item_slot.item.name == item_name)
 
 
-## Searches the [member inventory] for the provided [Item], returning the [ItemSlot] containing
+## Searches the [member inventory] for the provided [Item], returning the first [ItemSlot] containing
 ## the [Item]. Returns [code]null[/code] if the [param item] was not found.
 func find_item(item: Item) -> ItemSlot:
 	var index: int = find_item_index(item, inventory)
@@ -95,7 +95,6 @@ func add_item(item: Item, quantity: int) -> void:
 ## the [ItemSlot] will be erased from the [member inventory].[br][br]
 ## Will not add items if a negative value is provided, see [method add_item].
 func remove_item(item: Item, quantity: int) -> void:
-	remove_item(item, quantity)
 	if not has_item(item):
 		return
 	
@@ -106,3 +105,15 @@ func remove_item(item: Item, quantity: int) -> void:
 		inventory.erase(item_slot)
 	
 	inventory_changed.emit()
+
+
+## Spawns the given [param item] into the game.
+func spawn_items(item: Item, position: Vector2, quantity: int = 0) -> void:
+	if not has_item(item):
+		return
+	
+	var item_slot: ItemSlot = find_item(item)
+	var item_count: int = clampi(quantity, 0, item_slot.item_count)
+	for count in item_count:
+		item_slot.spawn_item(position)
+		inventory_changed.emit()

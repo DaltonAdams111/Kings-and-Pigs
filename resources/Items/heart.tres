@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b0tdurqj02x40"]
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://b0tdurqj02x40"]
 
-[ext_resource type="PackedScene" uid="uid://bo2suw2uw4hsk" path="res://scenes/Collectables/Heart/collectable_heart.tscn" id="1_ijrma"]
 [ext_resource type="Script" uid="uid://ch4dqx37fiqlt" path="res://scenes/Components/InventoryComponent/item.gd" id="2_x0wsh"]
 
 [resource]
 script = ExtResource("2_x0wsh")
 name = "Heart"
 is_stackable = true
-scene = ExtResource("1_ijrma")
+scene_path = "res://scenes/Collectables/Heart/collectable_heart.tscn"
 metadata/_custom_type_script = "uid://ch4dqx37fiqlt"
