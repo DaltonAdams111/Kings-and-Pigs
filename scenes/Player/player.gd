@@ -53,6 +53,7 @@ var can_enter_door: bool = false
 
 
 func _ready() -> void:
+	inventory_component.consolidate_items()
 	health_component.damage(1)
 	health_component.damage(1)
 	health_component.damage(1)
@@ -138,4 +139,4 @@ func _on_inventory_component_inventory_changed() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test_action"):
-		inventory_component.spawn_items(inventory_component.find_item_name("Diamond").item, global_position, 1)
+		inventory_component.spawn_all_items(global_position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqyp6le4hgtlr"]
+[gd_scene load_steps=5 format=3 uid="uid://dqyp6le4hgtlr"]
 
 [ext_resource type="Script" uid="uid://cfgbe0uxbv0kn" path="res://scenes/Collectables/collectable.gd" id="1_es1ff"]
 [ext_resource type="PackedScene" uid="uid://bm4esfxb638un" path="res://scenes/Components/CollectableComponent/collectable_component.tscn" id="1_savfg"]
@@ -7,14 +7,30 @@
 friction = 0.5
 bounce = 0.5
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_es1ff"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
 [node name="Collectable" type="RigidBody2D"]
+collision_layer = 8192
+collision_mask = 4096
 physics_material_override = SubResource("PhysicsMaterial_es1ff")
 gravity_scale = 0.8
 continuous_cd = 1
 script = ExtResource("1_es1ff")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_es1ff")
+animation = &"idle"
 
 [node name="CollectableComponent" parent="." instance=ExtResource("1_savfg")]
 
+[node name="CollectDelayTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="collected" from="CollectableComponent" to="." method="_on_collectable_component_collected"]
+[connection signal="timeout" from="CollectDelayTimer" to="." method="_on_collect_delay_timer_timeout"]

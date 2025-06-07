@@ -75,26 +75,20 @@ animations = [{
 radius = 6.0
 
 [node name="CollectableHeart" instance=ExtResource("1_dum2c")]
-collision_layer = 8192
-collision_mask = 4096
 lock_rotation = true
 script = ExtResource("1_x8j4o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_mpeat")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(-2, -8)
+position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_x8j4o")
-animation = &"idle"
-autoplay = "idle"
 
 [node name="CollectableComponent" parent="." index="2"]
 collision_masks = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent" index="0"]
-position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_x8j4o")
 
 [connection signal="collected" from="." to="." method="_on_collected"]

@@ -90,28 +90,22 @@ animations = [{
 radius = 6.0
 
 [node name="CollectableDiamond" instance=ExtResource("1_sg2ap")]
-collision_layer = 8192
-collision_mask = 4096
 lock_rotation = true
 script = ExtResource("2_jfbau")
 item = ExtResource("3_jfbau")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_0jspg")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(-2, -7)
+position = Vector2(-2, 1)
 sprite_frames = SubResource("SpriteFrames_nitau")
-animation = &"idle"
-autoplay = "idle"
 frame_progress = 0.456246
 
 [node name="CollectableComponent" parent="." index="2"]
 collision_masks = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent" index="0"]
-position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_8ge4n")
 
 [connection signal="collected" from="." to="." method="_on_collected"]

@@ -18,6 +18,9 @@ tile_set = ExtResource("2_muv8p")
 [node name="Decorations" type="TileMapLayer" parent="TileMapLayers"]
 tile_set = ExtResource("2_muv8p")
 
+[node name="Collectables" type="TileMapLayer" parent="TileMapLayers"]
+tile_set = ExtResource("2_muv8p")
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="Objects" type="Node2D" parent="."]

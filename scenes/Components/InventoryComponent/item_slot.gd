@@ -6,7 +6,7 @@ class_name ItemSlot
 ## Class for collecting and organizing [Item]s.
 
 
-## Emitted when the [member item] or [item_count] changes.
+## Emitted when the [member item] or [member item_count] changes.
 signal item_changed(new_item: Item, new_count: int)
 
 ## The [Item] this [ItemSlot] contains.
@@ -52,8 +52,9 @@ func remove_items(quantity: int) -> void:
 	item_count -= quantity
 
 
-## Spawns this [ItemSlot]'s [member item] into the world.
-func spawn_item(position: Vector2) -> void:
+## Spawns this [ItemSlot]'s [member item] into the world at the given [param position].
+## Use the [param magnitude] to set the velocity at which the item will spawn with.
+func spawn_item(position: Vector2, magnitude: float = 200) -> void:
 	if not item.scene_path:
 		return
 	
@@ -62,7 +63,7 @@ func spawn_item(position: Vector2) -> void:
 	
 	var child_item: Node = load(item.scene_path).instantiate()
 	randomize()
-	var velocity: Vector2 = (Vector2.UP * 200).rotated(randf_range(-0.5, 0.5))
+	var velocity: Vector2 = (Vector2.UP * magnitude).rotated(randf_range(-1.0, 1.0))
 	child_item.linear_velocity = velocity
 	Game.current_level.add_collectable(child_item, (position + Vector2(0, -25)))
 	item_count -= 1
