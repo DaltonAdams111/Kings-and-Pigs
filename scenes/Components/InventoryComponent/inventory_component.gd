@@ -10,7 +10,15 @@ class_name InventoryComponent
 signal inventory_changed
 
 ## Array containing [ItemSlot]s which hold [Item] data.
-@export var inventory: Array[ItemSlot]
+@export_group("Items", "exported")
+@export var exported_inventory: Array[ItemSlot]
+
+var inventory: Array[ItemSlot] = []
+
+
+func _ready() -> void:
+	for item_slot in exported_inventory:
+		inventory.append(item_slot.duplicate())
 
 
 ## Checks if any [ItemSlot] contains the provided [Item].
@@ -66,6 +74,9 @@ func consolidate_items() -> void:
 	var new_inventory: Array[ItemSlot]
 	
 	for slot in inventory:
+		if slot.item_count == 0:
+			continue
+		
 		var item: Item = slot.item
 		if item.name not in new_inventory.map(func(item_slot: ItemSlot): return item_slot.item.name):
 			var new_slot = ItemSlot.new(item, slot.item_count)

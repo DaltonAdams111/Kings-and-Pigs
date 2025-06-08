@@ -14,6 +14,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAcAAAAAAAEAAAABAAgAAAAAAAIAAAABAAg
 [node name="Decorations" parent="TileMapLayers" index="1"]
 tile_map_data = PackedByteArray("AAAJAAgAAgAAAAAAAQAKAAgAAgAAAAAAAQAJAAoAAgAAAAAAAQAKAAoAAgAAAAAAAQAJAAkAAgAAAAAAAQAJAAcAAgAAAAAAAQAKAAcAAgAAAAAAAQAKAAkAAgAAAAAAAQA=")
 
+[node name="Objects" parent="TileMapLayers" index="2"]
+tile_map_data = PackedByteArray("AAAIAAoAAwAAAAAAAQALAAoAAwAAAAAAAQAJAAoAAwAAAAAAAQAKAAoAAwAAAAAAAQAIAAkAAwAAAAAAAQAJAAkAAwAAAAAAAQAKAAkAAwAAAAAAAQALAAkAAwAAAAAAAQA=")
+
 [node name="SpawnDoor" parent="Doors" index="0" instance=ExtResource("3_8i0hj")]
 position = Vector2(192, 352)
 

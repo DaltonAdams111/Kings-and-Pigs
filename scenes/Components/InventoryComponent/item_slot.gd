@@ -63,7 +63,7 @@ func spawn_item(position: Vector2, magnitude: float = 200) -> void:
 	
 	var child_item: Node = load(item.scene_path).instantiate()
 	randomize()
-	var velocity: Vector2 = (Vector2.UP * magnitude).rotated(randf_range(-1.0, 1.0))
+	var velocity: Vector2 = (Vector2.UP * magnitude).rotated(randf_range(-0.5, 0.5))
 	child_item.linear_velocity = velocity
 	Game.current_level.add_collectable(child_item, (position + Vector2(0, -25)))
 	item_count -= 1

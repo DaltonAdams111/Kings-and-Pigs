@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ow1vu2n73wa6"]
+[gd_scene load_steps=16 format=3 uid="uid://ow1vu2n73wa6"]
 
 [ext_resource type="PackedScene" uid="uid://dqyp6le4hgtlr" path="res://scenes/Collectables/collectable.tscn" id="1_dum2c"]
 [ext_resource type="Texture2D" uid="uid://dasguwto7ifd7" path="res://assets/12-Live and Coins/Big Heart Idle (18x14).png" id="1_mpeat"]
 [ext_resource type="Script" uid="uid://bcqi5lguhdtej" path="res://scenes/Collectables/Heart/collectable_heart.gd" id="1_x8j4o"]
+[ext_resource type="Resource" uid="uid://b0tdurqj02x40" path="res://resources/Items/heart.tres" id="3_myecy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mpeat"]
 radius = 8.0
@@ -77,6 +78,7 @@ radius = 6.0
 [node name="CollectableHeart" instance=ExtResource("1_dum2c")]
 lock_rotation = true
 script = ExtResource("1_x8j4o")
+item = ExtResource("3_myecy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_mpeat")
