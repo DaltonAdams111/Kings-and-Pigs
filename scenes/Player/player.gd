@@ -65,6 +65,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	decelerate(delta)
+	#handle_collisions()
 	
 	can_attack = attack_cooldown_timer.is_stopped()
 	can_jump = is_on_floor()
@@ -140,3 +141,11 @@ func _on_inventory_component_inventory_changed() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("test_action"):
 		inventory_component.spawn_all_items(global_position)
+
+
+#func handle_collisions() -> void:
+	#for count in get_slide_collision_count():
+		#var collision: KinematicCollision2D = get_slide_collision(count)
+		#if collision.get_collider() is PhysicsObject:
+			#var direction: Vector2 = -collision.get_normal()
+			#pass

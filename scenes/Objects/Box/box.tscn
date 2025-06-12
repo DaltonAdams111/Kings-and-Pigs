@@ -1,0 +1,80 @@
+[gd_scene load_steps=16 format=3 uid="uid://crq3qo30xtnc8"]
+
+[ext_resource type="PackedScene" uid="uid://ctd2t541124ln" path="res://scenes/Objects/PhysicsObject/physics_object.tscn" id="1_45827"]
+[ext_resource type="Script" uid="uid://cc4rh1ny11sop" path="res://scenes/Objects/Box/box.gd" id="2_afahl"]
+[ext_resource type="Texture2D" uid="uid://k3u3ag47hwp5" path="res://assets/08-Box/Hit.png" id="2_s0bql"]
+[ext_resource type="Texture2D" uid="uid://dahjg14x4dhte" path="res://assets/08-Box/Idle.png" id="3_afahl"]
+[ext_resource type="Script" uid="uid://ch4dqx37fiqlt" path="res://scenes/Components/InventoryComponent/item.gd" id="3_ax4so"]
+[ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="4_xfbio"]
+[ext_resource type="PackedScene" uid="uid://iex0slioqmu3" path="res://scenes/Components/HealthComponent/health_component.tscn" id="5_e4iyb"]
+[ext_resource type="Resource" uid="uid://b0tdurqj02x40" path="res://resources/Items/heart.tres" id="5_f3j4a"]
+[ext_resource type="PackedScene" uid="uid://bnbatr7lw83tv" path="res://scenes/Components/HurtboxComponent/hurtbox_component.tscn" id="6_ax4so"]
+[ext_resource type="PackedScene" uid="uid://6qvhtwtw8s0i" path="res://scenes/Components/InventoryComponent/inventory_component.tscn" id="7_7fj8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7t3is"]
+size = Vector2(21, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gooo8"]
+atlas = ExtResource("2_s0bql")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fj8h"]
+atlas = ExtResource("3_afahl")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xfbio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gooo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gooo8")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fj8h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfbio"]
+size = Vector2(19, 14)
+
+[node name="Box" instance=ExtResource("1_45827")]
+script = ExtResource("2_afahl")
+possible_items = Array[ExtResource("3_ax4so")]([ExtResource("4_xfbio"), ExtResource("5_f3j4a")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_7t3is")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_xfbio")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_e4iyb")]
+hurtbox = NodePath("../HurtboxComponent")
+MAX_HEALTH = 2
+
+[node name="HurtboxComponent" parent="." index="3" instance=ExtResource("6_ax4so")]
+invulnerable_time_sec = 0.25
+collision_layers = 1024
+collision_masks = 546
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="1"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_xfbio")
+debug_color = Color(0.588235, 0, 0, 0.392157)
+
+[node name="InventoryComponent" parent="." index="4" instance=ExtResource("7_7fj8h")]
+
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
+[connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]

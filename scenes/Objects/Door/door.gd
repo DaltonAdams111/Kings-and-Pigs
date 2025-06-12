@@ -1,3 +1,4 @@
+@tool
 extends Area2D
 class_name Door
 
@@ -6,12 +7,20 @@ class_name Door
 
 
 ## The path of the level scene this [Door] leads to.
-@export var target_level_path: String = ""
+@export var target_level_path: String = "":
+	set(value):
+			target_level_path = value
+			$LevelLabel.text = value.get_slice("/", 4)
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 ## Timer that calls [method close_door] once the timer times out.
 @onready var door_open_timer: Timer = $DoorOpenTimer
+
+
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		$LevelLabel.hide()
 
 
 func _input(event: InputEvent) -> void:

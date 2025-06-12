@@ -7,14 +7,6 @@ class_name Crate
 @onready var inventory_component: InventoryComponent = $InventoryComponent
 
 
-func _on_health_component_health_changed(new_health: int) -> void:
-	print("%s's new health: %d" %[name, new_health])
-
-
-func _on_hurtbox_component_hit(damage_amount: int) -> void:
-	print("%s was hit for %d damage" %[name, damage_amount])
-
-
 func _on_health_component_health_depeted() -> void:
 	inventory_component.spawn_all_items(global_position)
 

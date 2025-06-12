@@ -71,7 +71,4 @@ script = ExtResource("5_4dn4j")
 exported_inventory = Array[ExtResource("6_1ti4h")]([SubResource("Resource_4dn4j"), SubResource("Resource_o47om")])
 metadata/_custom_type_script = "uid://c1ih4an58ukja"
 
-[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
-[connection signal="health_depeted" from="HealthComponent" to="." method="_on_health_component_health_depeted"]
-[connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]
 [connection signal="inventory_changed" from="InventoryComponent" to="." method="_on_inventory_component_inventory_changed"]

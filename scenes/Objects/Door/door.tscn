@@ -247,4 +247,24 @@ autoplay = "idle"
 wait_time = 1.5
 one_shot = true
 
+[node name="LevelLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(46, 12)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -68.0
+offset_right = 23.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+uppercase = true
+
 [connection signal="timeout" from="DoorOpenTimer" to="." method="_on_door_open_timer_timeout"]

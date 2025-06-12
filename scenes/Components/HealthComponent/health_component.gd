@@ -8,7 +8,7 @@ class_name HealthComponent
 ## Emitted when the [member current_health] changes.
 signal health_changed(new_health: int)
 
-signal health_depeted
+signal health_depleted
 
 @export_group("Hit Detection")
 ## [HurtboxComponent] to detect collisions.
@@ -30,7 +30,7 @@ signal health_depeted
 			current_health = new_health
 			health_changed.emit(current_health)
 			if current_health == 0:
-				health_depeted.emit()
+				health_depleted.emit()
 
 
 func _ready() -> void:
