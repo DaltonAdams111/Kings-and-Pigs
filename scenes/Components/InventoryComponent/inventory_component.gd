@@ -9,20 +9,23 @@ class_name InventoryComponent
 ## or when any of its [ItemSlot]s properties change.
 signal inventory_changed
 
-## Array containing [ItemSlot]s which hold [Item] data.
-@export_group("Items", "exported")
-@export var exported_inventory: Array[ItemSlot]
 
+@export_group("Items", "exported")
+## Exported [member inventory] for setting this [InventoryComponent]'s starting items.[br][br]
+## [ItemSlot]'s from the [member exported_inventory] are duplicated into the [member inventory]
+## upon [method _ready] to bypass memory sharing issue.
+@export var exported_inventory: Array[ItemSlot] = []
+
+## Array containing [ItemSlot]s which hold [Item] data.
 var inventory: Array[ItemSlot] = []
 
-var spawn_delay_interval: int = 5
+var spawn_delay_interval: int = 10
 var spawn_delay_seconds: float = 0.001
 
 
 func _ready() -> void:
 	for item_slot in exported_inventory:
 		inventory.append(item_slot.duplicate())
-		
 
 
 ## Checks if any [ItemSlot] contains the provided [Item].

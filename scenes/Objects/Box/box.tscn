@@ -49,8 +49,8 @@ size = Vector2(19, 14)
 
 [node name="Box" instance=ExtResource("1_45827")]
 script = ExtResource("2_afahl")
-possible_items = Array[ExtResource("3_ax4so")]([ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("5_f3j4a")])
-possible_number_of_items = 4
+possible_items = Array[ExtResource("3_ax4so")]([ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("5_f3j4a")])
+possible_number_of_items = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2(-0.5, 0)
@@ -66,9 +66,11 @@ hurtbox = NodePath("../HurtboxComponent")
 MAX_HEALTH = 2
 
 [node name="HurtboxComponent" parent="." index="3" instance=ExtResource("6_ax4so")]
+collision_layer = 1024
+collision_mask = 546
 invulnerable_time_sec = 0.25
-collision_layers = 1024
-collision_masks = 546
+owner_collision = 1024
+attacked_by_collision = 546
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="1"]
 position = Vector2(-0.5, 0)

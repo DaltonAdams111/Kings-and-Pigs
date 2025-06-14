@@ -1,3 +1,4 @@
+@tool
 extends Area2D
 class_name HurtboxComponent
 
@@ -16,20 +17,31 @@ signal hit(damage_amount: int)
 ## If this [HurtboxComponent] can currently be hurt.
 var can_take_damage: bool = true
 
-@export_group("Collision", "collision")
-## The physics layers this [HurtboxComponent] is on.
-@export_flags_2d_physics var collision_layers: int
+@export_group("Hurtbox Collision")
+@export_subgroup("Hurtbox Owner", "owner_")
+## The physics layer this [HurtboxComponent] is on.
+@export_flags("Player:4", "Enemy:64", "Object:1024")
+var owner_collision: int = 0:
+	set(value):
+		if value == 0:
+			owner_collision = value
+		elif owner_collision:
+			owner_collision = absi(owner_collision - value)
+		else:
+			owner_collision = value
 
-## The physics layers this [HurtboxComponent] checks for.
-@export_flags_2d_physics var collision_masks: int
+@export_subgroup("Attacked By", "attacked_by_")
+## The physics layers this [HurtboxComponent] can be hurt by.
+@export_flags("Player:2", "Enemy:32", "Object:512")
+var attacked_by_collision: int = 0
 
 
 func _ready() -> void:
-	if collision_layers:
-		collision_layer = collision_layers
+	if owner_collision:
+		collision_layer = owner_collision
 	
-	if collision_masks:
-		collision_mask = collision_masks
+	if attacked_by_collision:
+		collision_mask = attacked_by_collision
 
 
 func _on_area_entered(area) -> void:

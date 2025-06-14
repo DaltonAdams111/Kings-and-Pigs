@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://r756311jbu85"]
+[gd_scene load_steps=6 format=3 uid="uid://r756311jbu85"]
 
 [ext_resource type="Script" uid="uid://ir8blxhrxm3p" path="res://scenes/Enemies/enemy.gd" id="1_8swre"]
 [ext_resource type="PackedScene" uid="uid://cgqwpfx18xvnh" path="res://scenes/Components/AttackComponent/attack_component.tscn" id="2_8swre"]
 [ext_resource type="PackedScene" uid="uid://iex0slioqmu3" path="res://scenes/Components/HealthComponent/health_component.tscn" id="2_48hpc"]
 [ext_resource type="PackedScene" uid="uid://bnbatr7lw83tv" path="res://scenes/Components/HurtboxComponent/hurtbox_component.tscn" id="3_0th86"]
+[ext_resource type="PackedScene" uid="uid://6qvhtwtw8s0i" path="res://scenes/Components/InventoryComponent/inventory_component.tscn" id="5_0th86"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 16
@@ -21,9 +22,14 @@ one_shot = true
 
 [node name="StateMachine" type="Node" parent="."]
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_48hpc")]
+[node name="InventoryComponent" parent="." instance=ExtResource("5_0th86")]
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("2_48hpc")]
+hurtbox = NodePath("../HurtboxComponent")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("3_0th86")]
+owner_collision = 64
+attacked_by_collision = 514
 
 [node name="AttackComponent" parent="." instance=ExtResource("2_8swre")]
 visible = true

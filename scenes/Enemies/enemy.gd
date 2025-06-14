@@ -10,6 +10,7 @@ class_name Enemy
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: Node = $StateMachine
+@onready var inventory_component: InventoryComponent = $InventoryComponent
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var attack_component: AttackComponent = $AttackComponent
