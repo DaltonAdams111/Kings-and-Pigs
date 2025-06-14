@@ -9,8 +9,8 @@ class_name Door
 ## The path of the level scene this [Door] leads to.
 @export var target_level_path: String = "":
 	set(value):
-			target_level_path = value
-			$LevelLabel.text = value.get_slice("/", 4)
+		target_level_path = value
+		$LevelLabel.text = value.get_slice("/", 4)
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

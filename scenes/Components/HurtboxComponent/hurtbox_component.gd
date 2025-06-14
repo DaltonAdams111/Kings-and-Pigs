@@ -13,6 +13,7 @@ signal hit(damage_amount: int)
 ## The number of seconds this [HurtboxComponent] will be invulnerable after being hit.
 @export var invulnerable_time_sec: float = 0.0
 
+## If this [HurtboxComponent] can currently be hurt.
 var can_take_damage: bool = true
 
 @export_group("Collision", "collision")

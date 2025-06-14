@@ -4,7 +4,7 @@ class_name Level
 
 @export var spawn_door: Door
 
-@onready var doors: Node2D = $Doors
+@onready var doors: Node2D = $TileMapLayers/Doors
 @onready var objects: Node2D = $Objects
 @onready var collectables: Node2D = $Collectables
 @onready var enemies: Node2D = $Enemies
