@@ -8,12 +8,13 @@ class_name Box
 @onready var inventory_component: InventoryComponent = $InventoryComponent
 
 @export var possible_items: Array[Item] = []
+@export var possible_number_of_items: int = 0
 var number_of_items: int = 0
 
 
 func _ready() -> void:
 	randomize()
-	number_of_items = randi() % 4
+	number_of_items = randi_range(0, possible_number_of_items)
 	randomize_items()
 	inventory_component.consolidate_items()
 

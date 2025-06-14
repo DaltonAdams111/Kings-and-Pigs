@@ -3,6 +3,7 @@ class_name PlayerUI
 
 @onready var player: Player = $".."
 @onready var hearts: Node2D = $Hearts
+@onready var ui_diamond: UIDiamond = $UIDiamond
 
 var player_hearts: Array[UIHeart]
 
@@ -15,10 +16,14 @@ func _ready() -> void:
 			player_hearts.append(child)
 
 
-func update_hearts(new_health: int):
+func update_hearts(new_health: int) -> void:
 	pass
 	for heart in player_hearts:
 		if heart.get_index() + 1 <= new_health:
 			heart.add()
 		else:
 			heart.remove()
+
+
+func update_diamonds(count: int) -> void:
+	ui_diamond.update_counter(count)

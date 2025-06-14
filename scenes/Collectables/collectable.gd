@@ -7,6 +7,7 @@ signal collected(body: Node2D, inventory: InventoryComponent)
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collectable_component: CollectableComponent = $CollectableComponent
 @onready var collect_delay_timer: Timer = $CollectDelayTimer
+@onready var floor_ray_cast: RayCast2D = $FloorRayCast
 
 @export var item: Item = null
 
@@ -16,6 +17,12 @@ signal collected(body: Node2D, inventory: InventoryComponent)
 func _ready() -> void:
 	collectable_component.monitoring = false
 	collect_delay_timer.start(collection_delay_sec)
+
+
+func _physics_process(_delta: float) -> void:
+	var collider = floor_ray_cast.get_collider()
+	if not collider:
+		sleeping = false
 
 
 func _on_collectable_component_collected(body: Node2D, inventory: InventoryComponent) -> void:

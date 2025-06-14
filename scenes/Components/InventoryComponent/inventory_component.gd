@@ -15,10 +15,14 @@ signal inventory_changed
 
 var inventory: Array[ItemSlot] = []
 
+var spawn_delay_interval: int = 5
+var spawn_delay_seconds: float = 0.001
+
 
 func _ready() -> void:
 	for item_slot in exported_inventory:
 		inventory.append(item_slot.duplicate())
+		
 
 
 ## Checks if any [ItemSlot] contains the provided [Item].
@@ -137,7 +141,7 @@ func erase_item(item: Item) -> void:
 
 ## Spawns the given [param item] into the game at the provided [param position].
 ## If a [param quantity] of [code]-1[/code] is provided, the [ItemSlot] will spawn
-func spawn_items(item: Item, position: Vector2, quantity: int = 1) -> void:
+func spawn_items(item: Item, position: Vector2, quantity: int = 1, magnitude: float = 200.0) -> void:
 	if not has_item(item):
 		return
 	
@@ -155,9 +159,9 @@ func spawn_items(item: Item, position: Vector2, quantity: int = 1) -> void:
 	var spawn_count: int = item_slot.item_count if quantity == -1 else min(quantity, item_slot.item_count)
 	
 	for count in spawn_count:
-		var timer: SceneTreeTimer = get_tree().create_timer(0.001)
-		await timer.timeout
-		item_slot.spawn_item(position)
+		if count % spawn_delay_interval == 0:
+				await get_tree().create_timer(spawn_delay_seconds).timeout
+		item_slot.spawn_item(position, magnitude)
 		inventory_changed.emit()
 	
 	if item_slot.item_count == 0:
@@ -167,15 +171,15 @@ func spawn_items(item: Item, position: Vector2, quantity: int = 1) -> void:
 
 
 ## Spawns all of the items this [member inventory] contains into the game at the provided [param position].
-func spawn_all_items(position: Vector2) -> void:
+func spawn_all_items(position: Vector2, magnitude: float = 200.0) -> void:
 	if not position:
 		return
 	
 	for item_slot in inventory:
 		for count in item_slot.item_count:
-			var timer: SceneTreeTimer = get_tree().create_timer(0.0001)
-			await timer.timeout
-			item_slot.spawn_item(position)
+			if count % spawn_delay_interval == 0:
+				await get_tree().create_timer(spawn_delay_seconds).timeout
+			item_slot.spawn_item(position, magnitude)
 			inventory_changed.emit()
 	
 	consolidate_items()
