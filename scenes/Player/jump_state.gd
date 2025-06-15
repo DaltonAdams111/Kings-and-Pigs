@@ -11,6 +11,7 @@ func enter() -> void:
 	var bonus_height: float = -(absf(player.velocity.x) / 5)
 	player.velocity.y = -player.JUMP_VELOCITY + bonus_height
 	
+	animation_player.speed_scale = 1
 	animation_player.play("jump")
 
 

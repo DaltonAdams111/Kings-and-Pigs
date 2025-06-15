@@ -19,7 +19,6 @@ func spawn_player():
 	spawn_door.open_door()
 
 
-
 func add_object(object: PhysicsObject, spawn_position: Vector2) -> void:
 	if not object:
 		return

@@ -8,6 +8,7 @@ var state_machine: PlayerStateMachine
 
 
 func enter() -> void:
+	animation_player.speed_scale = 1
 	animation_player.play("run")
 
 
@@ -22,6 +23,8 @@ func update(_delta: float) -> void:
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
 	player.move(delta, can_flip_sprite)
+	var speed = min((abs(player.velocity.x) / player.MOVEMENT_SPEED) + 0.5, 1)
+	animation_player.speed_scale = speed
 	
 	if Input.is_action_pressed("attack") and player.can_attack:
 		change_state.emit("attack")

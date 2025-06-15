@@ -11,6 +11,7 @@ func enter() -> void:
 	if not animation_player.animation_finished.is_connected(on_animation_finished):
 		animation_player.animation_finished.connect(on_animation_finished)
 	
+	animation_player.speed_scale = 1
 	animation_player.play("land")
 	player.velocity.x = 0
 	player.player_camera.shake(player.fall_distance / player.FALL_DISTANCE_THRESHOLD)

@@ -28,6 +28,8 @@ one_shot = true
 hurtbox = NodePath("../HurtboxComponent")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("3_0th86")]
+collision_layer = 64
+collision_mask = 514
 owner_collision = 64
 attacked_by_collision = 514
 

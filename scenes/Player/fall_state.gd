@@ -9,6 +9,7 @@ var state_machine: PlayerStateMachine
 
 func enter() -> void:
 	player.highest_point = player.global_position
+	animation_player.speed_scale = 1
 	animation_player.play("fall")
 
 

@@ -11,6 +11,7 @@ func enter() -> void:
 	if not animation_player.animation_finished.is_connected(on_animation_finished):
 		animation_player.animation_finished.connect(on_animation_finished)
 	
+	animation_player.speed_scale = 1
 	animation_player.play("attack")
 	player.attack_cooldown_timer.start(player.ATTACK_COOLDOWN)
 

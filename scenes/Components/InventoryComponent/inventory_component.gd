@@ -19,8 +19,10 @@ signal inventory_changed
 ## Array containing [ItemSlot]s which hold [Item] data.
 var inventory: Array[ItemSlot] = []
 
+## The number of items that can be spawned at once before needing to wait.
 var spawn_delay_interval: int = 10
-var spawn_delay_seconds: float = 0.001
+## The number of seconds to wait once the [member spawn_delay_interval] is met during spawning.
+var spawn_delay_seconds: float = 0.01
 
 
 func _ready() -> void:

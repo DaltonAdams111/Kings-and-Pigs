@@ -11,8 +11,11 @@ signal health_changed(new_health: int)
 signal health_depleted
 
 @export_group("Hit Detection")
-## [HurtboxComponent] to detect collisions.
+## [HurtboxComponent] to detect collisions with [AttackComponent]s.
 @export var hurtbox: HurtboxComponent
+
+## If [code]true[/code], this [HealthComponent] will not take damage when [method damage] is called.
+@export var invulnerable: bool = false
 
 @export_group("Health")
 ## The maximum health for this [HealthComponent].
@@ -43,6 +46,9 @@ func _ready() -> void:
 ## then subtracts the adjusted [param damage_amount] from the [member current_health].[br][br]
 ## Will not heal if a negative value is provided; see [method heal] instead.
 func damage(damage_amount: int) -> void:
+	if invulnerable:
+		return
+	
 	var adjusted_damage: int = clampi(damage_amount, 0, DAMAGE_CLAMP)
 	current_health -= adjusted_damage
 

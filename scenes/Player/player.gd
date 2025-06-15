@@ -86,7 +86,7 @@ func decelerate(delta: float):
 
 func move(delta: float, flip_sprite: bool = false) -> void:
 	if can_fall_through_platform() and Input.is_action_pressed("move_down"):
-		position.y += 1.5
+		position.y += 1.25
 	
 	direction = Input.get_axis("move_left", "move_right")
 	
