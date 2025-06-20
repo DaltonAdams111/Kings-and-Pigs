@@ -3,6 +3,7 @@ class_name Box
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var floor_ray_cast: RayCast2D = $FloorRayCast
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var inventory_component: InventoryComponent = $InventoryComponent
@@ -17,6 +18,11 @@ func _ready() -> void:
 	number_of_items = randi_range(0, possible_number_of_items)
 	randomize_items()
 	inventory_component.consolidate_items()
+
+
+func _physics_process(_delta: float) -> void:
+	if not floor_ray_cast.is_colliding():
+		sleeping = false
 
 
 func randomize_items() -> void:

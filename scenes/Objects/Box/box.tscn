@@ -61,11 +61,15 @@ sprite_frames = SubResource("SpriteFrames_xfbio")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_e4iyb")]
+[node name="FloorRayCast" type="RayCast2D" parent="." index="2"]
+target_position = Vector2(0, 10)
+collision_mask = 4352
+
+[node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_e4iyb")]
 hurtbox = NodePath("../HurtboxComponent")
 MAX_HEALTH = 2
 
-[node name="HurtboxComponent" parent="." index="3" instance=ExtResource("6_ax4so")]
+[node name="HurtboxComponent" parent="." index="4" instance=ExtResource("6_ax4so")]
 collision_layer = 1024
 collision_mask = 546
 invulnerable_time_sec = 0.25
@@ -77,7 +81,7 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_xfbio")
 debug_color = Color(0.588235, 0, 0, 0.392157)
 
-[node name="InventoryComponent" parent="." index="4" instance=ExtResource("7_7fj8h")]
+[node name="InventoryComponent" parent="." index="5" instance=ExtResource("7_7fj8h")]
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]

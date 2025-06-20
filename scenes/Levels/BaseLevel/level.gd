@@ -1,8 +1,9 @@
+@tool
 extends Node2D
 class_name Level
 
 
-@export var spawn_door: Door
+@export var spawn_door: Door = null
 
 @onready var terrain_layer: TileMapLayer = $TileMapLayers/TerrainLayer
 @onready var doors_layer: Node2D = $TileMapLayers/DoorsLayer
