@@ -26,4 +26,5 @@ func update_hearts(new_health: int) -> void:
 
 
 func update_diamonds(count: int) -> void:
-	ui_diamond.update_counter(count)
+	var diamond_count: int = clampi(count, 0, 999)
+	ui_diamond.update_counter(diamond_count)

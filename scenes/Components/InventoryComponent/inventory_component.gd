@@ -10,24 +10,14 @@ class_name InventoryComponent
 signal inventory_changed
 
 
-@export_group("Items", "exported")
-## Exported [member inventory] for setting this [InventoryComponent]'s starting items.[br][br]
-## [ItemSlot]'s from the [member exported_inventory] are duplicated into the [member inventory]
-## upon [method _ready] to bypass memory sharing issue.
-@export var exported_inventory: Array[ItemSlot] = []
-
+@export_group("Items", "")
 ## Array containing [ItemSlot]s which hold [Item] data.
-var inventory: Array[ItemSlot] = []
+@export var inventory: Array[ItemSlot] = []
 
 ## The number of items that can be spawned at once before needing to wait.
 var spawn_delay_interval: int = 10
 ## The number of seconds to wait once the [member spawn_delay_interval] is met during spawning.
 var spawn_delay_seconds: float = 0.01
-
-
-func _ready() -> void:
-	for item_slot in exported_inventory:
-		inventory.append(item_slot.duplicate())
 
 
 ## Checks if any [ItemSlot] contains the provided [Item].

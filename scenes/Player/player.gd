@@ -136,9 +136,9 @@ func _on_health_component_health_changed(new_health: int) -> void:
 func _on_inventory_component_inventory_changed() -> void:
 	var diamond_slot: ItemSlot = inventory_component.find_item_name("Diamond")
 	if diamond_slot:
-		player_ui.ui_diamond.diamond_count = diamond_slot.item_count
+		player_ui.update_diamonds(diamond_slot.item_count)
 	else:
-		player_ui.ui_diamond.diamond_count = 0
+		player_ui.update_diamonds(0)
 	
 	for slot in inventory_component.inventory:
 		print("%s_%d: %d"%[slot.item.name, inventory_component.inventory.find(slot), slot.item_count])

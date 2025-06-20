@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://r756311jbu85"]
+[gd_scene load_steps=9 format=3 uid="uid://r756311jbu85"]
 
 [ext_resource type="Script" uid="uid://ir8blxhrxm3p" path="res://scenes/Enemies/enemy.gd" id="1_8swre"]
 [ext_resource type="PackedScene" uid="uid://cgqwpfx18xvnh" path="res://scenes/Components/AttackComponent/attack_component.tscn" id="2_8swre"]
 [ext_resource type="PackedScene" uid="uid://iex0slioqmu3" path="res://scenes/Components/HealthComponent/health_component.tscn" id="2_48hpc"]
 [ext_resource type="PackedScene" uid="uid://bnbatr7lw83tv" path="res://scenes/Components/HurtboxComponent/hurtbox_component.tscn" id="3_0th86"]
+[ext_resource type="Script" uid="uid://kjehr0uxxlhm" path="res://scenes/Components/InventoryComponent/item_slot.gd" id="3_uqsge"]
+[ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="4_dmeym"]
 [ext_resource type="PackedScene" uid="uid://6qvhtwtw8s0i" path="res://scenes/Components/InventoryComponent/inventory_component.tscn" id="5_0th86"]
+
+[sub_resource type="Resource" id="Resource_uqsge"]
+resource_local_to_scene = true
+script = ExtResource("3_uqsge")
+item = ExtResource("4_dmeym")
+item_count = 10
+metadata/_custom_type_script = "uid://kjehr0uxxlhm"
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 16
@@ -23,6 +32,7 @@ one_shot = true
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_0th86")]
+inventory = Array[ExtResource("3_uqsge")]([SubResource("Resource_uqsge")])
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("2_48hpc")]
 hurtbox = NodePath("../HurtboxComponent")
