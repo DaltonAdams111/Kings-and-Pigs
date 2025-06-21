@@ -2,7 +2,7 @@
 extends Node2D
 
 
-@export_tool_button("Create Door") var create_door_action = create_door
+@export_tool_button("Create Door", "ParallaxLayer") var create_door_action = create_door
 
 
 func create_door() -> void:

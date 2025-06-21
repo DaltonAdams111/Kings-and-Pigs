@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://crq3qo30xtnc8"]
+[gd_scene load_steps=17 format=3 uid="uid://crq3qo30xtnc8"]
 
 [ext_resource type="PackedScene" uid="uid://ctd2t541124ln" path="res://scenes/Objects/PhysicsObject/physics_object.tscn" id="1_45827"]
 [ext_resource type="Script" uid="uid://cc4rh1ny11sop" path="res://scenes/Objects/Box/box.gd" id="2_afahl"]
@@ -10,6 +10,12 @@
 [ext_resource type="Resource" uid="uid://b0tdurqj02x40" path="res://resources/Items/heart.tres" id="5_f3j4a"]
 [ext_resource type="PackedScene" uid="uid://bnbatr7lw83tv" path="res://scenes/Components/HurtboxComponent/hurtbox_component.tscn" id="6_ax4so"]
 [ext_resource type="PackedScene" uid="uid://6qvhtwtw8s0i" path="res://scenes/Components/InventoryComponent/inventory_component.tscn" id="7_7fj8h"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xfbio"]
+friction = 0.8
+rough = true
+bounce = 0.1
+absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t3is"]
 size = Vector2(21, 16)
@@ -48,6 +54,7 @@ animations = [{
 size = Vector2(19, 14)
 
 [node name="Box" instance=ExtResource("1_45827")]
+physics_material_override = SubResource("PhysicsMaterial_xfbio")
 script = ExtResource("2_afahl")
 possible_items = Array[ExtResource("3_ax4so")]([ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("5_f3j4a")])
 possible_number_of_items = 3
@@ -68,6 +75,7 @@ collision_mask = 4352
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_e4iyb")]
 hurtbox = NodePath("../HurtboxComponent")
 MAX_HEALTH = 2
+DAMAGE_CLAMP = 2
 
 [node name="HurtboxComponent" parent="." index="4" instance=ExtResource("6_ax4so")]
 collision_layer = 1024

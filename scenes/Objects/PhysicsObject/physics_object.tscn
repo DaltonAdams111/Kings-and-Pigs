@@ -1,16 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctd2t541124ln"]
+[gd_scene load_steps=2 format=3 uid="uid://ctd2t541124ln"]
 
 [ext_resource type="Script" uid="uid://b0dv1qxqdxu50" path="res://scenes/Objects/PhysicsObject/physics_object.gd" id="1_17ced"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_17ced"]
-friction = 0.5
-bounce = 0.1
 
 [node name="PhysicsObject" type="RigidBody2D"]
 collision_layer = 256
 collision_mask = 4369
-mass = 0.01
-physics_material_override = SubResource("PhysicsMaterial_17ced")
 continuous_cd = 1
 contact_monitor = true
 max_contacts_reported = 5

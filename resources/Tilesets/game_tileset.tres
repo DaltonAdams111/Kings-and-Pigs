@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://ijvfj6qr058b"]
+[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://ijvfj6qr058b"]
 
 [ext_resource type="Texture2D" uid="uid://bih7njq8fdt7l" path="res://assets/14-TileSets/Terrain (32x32).png" id="1_1lckd"]
 [ext_resource type="Texture2D" uid="uid://b43y1qekqrtd7" path="res://assets/14-TileSets/Decorations (32x32).png" id="2_mkbxu"]
 [ext_resource type="PackedScene" uid="uid://ppvit3sesljf" path="res://scenes/Terrain/Platform/thin_platform.tscn" id="3_mkbxu"]
 [ext_resource type="PackedScene" uid="uid://c04ryytrrwgc5" path="res://scenes/Terrain/Platform/thick_platform.tscn" id="4_udjux"]
+[ext_resource type="PackedScene" uid="uid://bydaendfa2cdo" path="res://scenes/Objects/Bomb/bomb.tscn" id="5_fh48l"]
 [ext_resource type="PackedScene" uid="uid://crq3qo30xtnc8" path="res://scenes/Objects/Box/box.tscn" id="5_sklf2"]
 [ext_resource type="PackedScene" uid="uid://ow1vu2n73wa6" path="res://scenes/Collectables/Heart/collectable_heart.tscn" id="6_0jync"]
 [ext_resource type="PackedScene" uid="uid://cyhd52shr0kii" path="res://scenes/Collectables/Diamond/collectable_diamond.tscn" id="7_sklf2"]
@@ -738,6 +739,7 @@ scenes/2/scene = ExtResource("4_udjux")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0jync"]
 resource_name = "Objects"
+scenes/1/scene = ExtResource("5_fh48l")
 scenes/2/scene = ExtResource("5_sklf2")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f7ueb"]

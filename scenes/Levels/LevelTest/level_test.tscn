@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://db8uvru15k421" path="res://scenes/Levels/BaseLevel/level.tscn" id="1_qerhj"]
 [ext_resource type="Script" uid="uid://b86npmhhtgbk3" path="res://scenes/Levels/LevelTest/level_test.gd" id="2_15bww"]
-[ext_resource type="PackedScene" uid="uid://vfouglp4uheq" path="res://scenes/Objects/Door/door.tscn" id="3_8i0hj"]
+[ext_resource type="PackedScene" uid="uid://vfouglp4uheq" path="res://scenes/Objects/Door/door.tscn" id="3_8tyuf"]
 
 [node name="LevelTest" node_paths=PackedStringArray("spawn_door") instance=ExtResource("1_qerhj")]
 script = ExtResource("2_15bww")
@@ -14,13 +14,13 @@ tile_map_data = PackedByteArray("AAAAAAAAAAACAAIAAAAAAAEAAAACAAIAAAAAAAIAAAACAAI
 [node name="DoorsLayer" parent="TileMapLayers" index="1"]
 position = Vector2(0, 16)
 
-[node name="SpawnDoor" parent="TileMapLayers/DoorsLayer" index="0" instance=ExtResource("3_8i0hj")]
-position = Vector2(-80, -48)
+[node name="SpawnDoor" parent="TileMapLayers/DoorsLayer" index="0" instance=ExtResource("3_8tyuf")]
+position = Vector2(-96, -48)
 
-[node name="ExitDoor_1" parent="TileMapLayers/DoorsLayer" index="1" instance=ExtResource("3_8i0hj")]
-position = Vector2(80, -48)
+[node name="ExitDoor_1" parent="TileMapLayers/DoorsLayer" index="1" instance=ExtResource("3_8tyuf")]
+position = Vector2(96, -48)
 interactable = true
 target_level_path = "res://scenes/Levels/Level1/level_1.tscn"
 
 [node name="ObjectsLayer" parent="TileMapLayers" index="3"]
-tile_map_data = PackedByteArray("AAD///7/AwAAAAAAAgAAAP7/AwAAAAAAAgD///3/AwAAAAAAAgAAAP3/AwAAAAAAAgD///z/AwAAAAAAAgAAAPz/AwAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAD7//7/AwAAAAAAAQD7//3/AwAAAAAAAQD+//7/AwAAAAAAAgABAP7/AwAAAAAAAgD+//z/AwAAAAAAAgD+//3/AwAAAAAAAgABAPz/AwAAAAAAAgABAP3/AwAAAAAAAgA=")

@@ -942,7 +942,13 @@ radius = 14.0
 height = 45.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("enter_door_states") groups=["Player"]]
-collision_mask = 4368
+collision_mask = 4352
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_max_angle = 1.0472
+platform_on_leave = 2
+platform_floor_layers = 4294905856
+safe_margin = 0.05
 script = ExtResource("1_cctgl")
 enter_door_states = [NodePath("StateMachine/Idle"), NodePath("StateMachine/Run")]
 
@@ -957,13 +963,12 @@ position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="FloorRayCast" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(0, -4)
-target_position = Vector2(0, 7)
-collision_mask = 4096
+target_position = Vector2(0, 10)
+collision_mask = 4352
+hit_from_inside = true
 
 [node name="DoorRayCast" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(0, -16)
 target_position = Vector2(0, 8)
 collision_mask = 16384
@@ -1069,6 +1074,7 @@ shape = SubResource("CapsuleShape2D_18ciy")
 debug_color = Color(0, 0.588235, 0, 0.392157)
 
 [node name="AttackComponent" parent="." instance=ExtResource("26_cg2hl")]
+visible = true
 collision_layer = 2
 collision_mask = 1088
 attack_damage = 1
