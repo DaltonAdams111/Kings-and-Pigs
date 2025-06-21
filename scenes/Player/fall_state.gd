@@ -40,7 +40,7 @@ func physics_update(delta: float) -> void:
 		change_state.emit("attack")
 	elif Input.is_action_pressed("jump") and player.can_jump:
 		change_state.emit("jump")
-	elif state_machine.player.direction:
+	elif player.direction:
 		change_state.emit("run")
 	else:
 		change_state.emit("idle")

@@ -8,3 +8,5 @@ script = ExtResource("1_0i15y")
 [node name="LevelGroup" type="Node2D" parent="."]
 
 [node name="PlayerGroup" type="Node2D" parent="."]
+
+[connection signal="ready" from="." to="." method="_on_ready"]

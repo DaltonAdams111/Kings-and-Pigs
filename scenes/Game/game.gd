@@ -1,6 +1,8 @@
 extends Node
 
 
+signal game_ready
+
 @onready var level_group: Node2D = $LevelGroup
 @onready var player_group: Node2D = $PlayerGroup
 
@@ -36,3 +38,7 @@ func load_player():
 
 func get_player():
 	return player
+
+
+func _on_ready() -> void:
+	game_ready.emit()

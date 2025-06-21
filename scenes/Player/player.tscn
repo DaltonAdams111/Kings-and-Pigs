@@ -1099,3 +1099,4 @@ debug_color = Color(0.980392, 0, 0.196078, 0.392157)
 
 [connection signal="inventory_changed" from="InventoryComponent" to="." method="_on_inventory_component_inventory_changed"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]

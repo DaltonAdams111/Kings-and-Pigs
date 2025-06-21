@@ -53,10 +53,8 @@ var can_enter_door: bool = false
 
 
 func _ready() -> void:
-	inventory_component.consolidate_items()
-	health_component.damage(1)
-	health_component.damage(1)
-	health_component.damage(1)
+	update_health_ui()
+	update_diamonds_ui()
 
 
 func _process(_delta: float) -> void:
@@ -129,11 +127,21 @@ func can_fall_through_platform() -> bool:
 	return true
 
 
-func _on_health_component_health_changed(new_health: int) -> void:
-	player_ui.update_hearts(new_health)
+func handle_collisions() -> void:
+	if is_on_floor_only():
+		return
+	
+	for count in get_slide_collision_count():
+		var collision: KinematicCollision2D = get_slide_collision(count)
+		if collision.get_collider() is Bomb:
+			var bomb: Bomb = collision.get_collider()
+			var push_direction: Vector2 = -collision.get_normal()
+			var push_force: float = 20.0 + velocity.x
+			
+			bomb.apply_central_impulse(push_direction * push_force)
 
 
-func _on_inventory_component_inventory_changed() -> void:
+func update_diamonds_ui() -> void:
 	var diamond_slot: ItemSlot = inventory_component.find_item_name("Diamond")
 	if diamond_slot:
 		player_ui.update_diamonds(diamond_slot.item_count)
@@ -155,16 +163,17 @@ func _input(event: InputEvent) -> void:
 	if item:
 		inventory_component.spawn_items(item, global_position + Vector2(0, -25))
 
+func _on_health_component_health_changed(_new_health: int) -> void:
+	update_health_ui()
 
-func handle_collisions() -> void:
-	if is_on_floor_only():
-		return
-	
-	for count in get_slide_collision_count():
-		var collision: KinematicCollision2D = get_slide_collision(count)
-		if collision.get_collider() is Bomb:
-			var bomb: Bomb = collision.get_collider()
-			var push_direction: Vector2 = -collision.get_normal()
-			var push_force: float = 20.0 + velocity.x
-			
-			bomb.apply_central_impulse(push_direction * push_force)
+
+func _on_inventory_component_inventory_changed() -> void:
+	update_diamonds_ui()
+
+
+func update_health_ui() -> void:
+	player_ui.update_hearts(health_component.current_health)
+
+
+func _on_hurtbox_component_hit(_damage_amount: int) -> void:
+	state_machine.change_state("hit")

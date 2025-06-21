@@ -37,7 +37,7 @@ func on_animation_finished(_animation: String):
 		change_state.emit("jump")
 	elif player.is_falling:
 		change_state.emit("fall")
-	elif state_machine.player.direction:
+	elif player.direction:
 		change_state.emit("run")
 	else:
 		change_state.emit("idle")

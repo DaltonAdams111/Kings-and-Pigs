@@ -15,12 +15,16 @@ signal inventory_changed
 @export var inventory: Array[ItemSlot] = []
 
 ## If [code]true[/code], the [member inventory] contains no [ItemSlot]s.
-var is_empty: bool = true
+var is_empty: bool
 
 ## The number of items that can be spawned at once before needing to wait.
 var spawn_delay_interval: int = 10
 ## The number of seconds to wait once the [member spawn_delay_interval] is met during spawning.
 var spawn_delay_seconds: float = 0.01
+
+
+func _ready() -> void:
+	is_empty = inventory.is_empty()
 
 
 ## Checks if any [ItemSlot] contains the provided [Item].
@@ -86,11 +90,6 @@ static func find_item_name_index(item_name: String, some_inventory: Array[ItemSl
 ## Merges any [ItemSlot]s that contain the same item and can be stacked.
 func consolidate_items() -> void:
 	var new_inventory: Array[ItemSlot] = []
-	
-	if is_empty:
-		inventory = new_inventory
-		inventory_changed.emit()
-		return
 	
 	for slot in inventory:
 		if slot.item_count == 0:
@@ -166,8 +165,6 @@ func spawn_items(item: Item, position: Vector2, quantity: int = 1, magnitude: fl
 	if not position:
 		return
 	
-	consolidate_items()
-	
 	var item_slot: ItemSlot = find_item(item)
 	if item_slot.item_count == 0:
 		erase_item(item_slot.item)
@@ -184,8 +181,7 @@ func spawn_items(item: Item, position: Vector2, quantity: int = 1, magnitude: fl
 	
 	if item_slot.item_count == 0:
 		remove_item(item_slot.item)
-	
-	inventory_changed.emit()
+		inventory_changed.emit()
 
 
 ## Spawns all of the items this [member inventory] contains into the game at the provided [param position].
@@ -204,4 +200,4 @@ func spawn_all_items(position: Vector2, magnitude: float = 200.0) -> void:
 
 
 func _on_inventory_changed() -> void:
-	is_empty = true if inventory.size() == 0 else false
+	is_empty = inventory.is_empty()
