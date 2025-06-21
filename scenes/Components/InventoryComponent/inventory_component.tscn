@@ -4,3 +4,5 @@
 
 [node name="InventoryComponent" type="Node"]
 script = ExtResource("1_inmbk")
+
+[connection signal="inventory_changed" from="." to="." method="_on_inventory_changed"]

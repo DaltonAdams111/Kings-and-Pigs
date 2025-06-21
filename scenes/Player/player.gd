@@ -145,8 +145,15 @@ func _on_inventory_component_inventory_changed() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("test_action"):
-		inventory_component.spawn_all_items(global_position)
+	if not event.is_action_pressed("test_action"):
+		return
+	
+	if inventory_component.is_empty:
+		return
+	
+	var item: Item = inventory_component.inventory[0].item
+	if item:
+		inventory_component.spawn_items(item, global_position + Vector2(0, -25))
 
 
 func handle_collisions() -> void:

@@ -14,6 +14,9 @@ signal inventory_changed
 ## Array containing [ItemSlot]s which hold [Item] data.
 @export var inventory: Array[ItemSlot] = []
 
+## If [code]true[/code], the [member inventory] contains no [ItemSlot]s.
+var is_empty: bool = true
+
 ## The number of items that can be spawned at once before needing to wait.
 var spawn_delay_interval: int = 10
 ## The number of seconds to wait once the [member spawn_delay_interval] is met during spawning.
@@ -22,6 +25,9 @@ var spawn_delay_seconds: float = 0.01
 
 ## Checks if any [ItemSlot] contains the provided [Item].
 func has_item(item: Item) -> bool:
+	if is_empty:
+		return false
+	
 	if not item:
 		return false
 	
@@ -30,6 +36,9 @@ func has_item(item: Item) -> bool:
 
 ## Checks if any [ItemSlot] contains the provided [Item] name.
 func has_item_name(item_name: String) -> bool:
+	if is_empty:
+		return false
+	
 	if not item_name:
 		return false
 	
@@ -39,6 +48,9 @@ func has_item_name(item_name: String) -> bool:
 ## Searches the [member inventory] for the provided [Item], returning the first [ItemSlot] containing
 ## the [Item]. Returns [code]null[/code] if the [param item] was not found.
 func find_item(item: Item) -> ItemSlot:
+	if is_empty:
+		return null
+	
 	var index: int = find_item_index(item, inventory)
 	if index == -1:
 		return null
@@ -55,6 +67,9 @@ static func find_item_index(item: Item, some_inventory: Array[ItemSlot]) -> int:
 ## Searches the [member inventory] for the provided [Item] name, returning the [ItemSlot] containing
 ## the [Item]. Returns [code]null[/code] if the [param item_name] was not found.
 func find_item_name(item_name: String) -> ItemSlot:
+	if is_empty:
+		return null
+	
 	var index: int = find_item_name_index(item_name, inventory)
 	if index == -1:
 		return null
@@ -70,7 +85,12 @@ static func find_item_name_index(item_name: String, some_inventory: Array[ItemSl
 
 ## Merges any [ItemSlot]s that contain the same item and can be stacked.
 func consolidate_items() -> void:
-	var new_inventory: Array[ItemSlot]
+	var new_inventory: Array[ItemSlot] = []
+	
+	if is_empty:
+		inventory = new_inventory
+		inventory_changed.emit()
+		return
 	
 	for slot in inventory:
 		if slot.item_count == 0:
@@ -111,6 +131,9 @@ func add_item(item: Item, quantity: int = 1) -> void:
 ## the [ItemSlot] will be erased from the [member inventory].[br][br]
 ## Will not add items if a negative value is provided, see [method add_item].
 func remove_item(item: Item, quantity: int = 1) -> void:
+	if is_empty:
+		return
+	
 	if not has_item(item):
 		return
 	
@@ -178,3 +201,7 @@ func spawn_all_items(position: Vector2, magnitude: float = 200.0) -> void:
 			inventory_changed.emit()
 	
 	consolidate_items()
+
+
+func _on_inventory_changed() -> void:
+	is_empty = true if inventory.size() == 0 else false

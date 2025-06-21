@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://c7vv6606gys1q"]
+
+[ext_resource type="Script" uid="uid://ch4dqx37fiqlt" path="res://scenes/Components/InventoryComponent/item.gd" id="1_xn3ls"]
+
+[resource]
+script = ExtResource("1_xn3ls")
+name = "Bomb"
+is_stackable = true
+scene_path = "res://scenes/Objects/Bomb/bomb.tscn"
+metadata/_custom_type_script = "uid://ch4dqx37fiqlt"

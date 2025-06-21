@@ -90,7 +90,6 @@ animations = [{
 radius = 6.0
 
 [node name="CollectableDiamond" instance=ExtResource("1_sg2ap")]
-lock_rotation = true
 script = ExtResource("2_jfbau")
 item = ExtResource("3_jfbau")
 
