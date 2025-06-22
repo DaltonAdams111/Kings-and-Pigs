@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c6pv8e85vt0v8"
+path="res://.godot/imported/Diamond Collision.ogg-d9f063fd678b098aa7c2cbab43791f83.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/12-Live and Coins/Diamond Collision.ogg"
+dest_files=["res://.godot/imported/Diamond Collision.ogg-d9f063fd678b098aa7c2cbab43791f83.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

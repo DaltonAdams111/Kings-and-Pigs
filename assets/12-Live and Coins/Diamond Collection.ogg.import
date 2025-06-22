@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://buesipixnnhqf"
+path="res://.godot/imported/Diamond Collection.ogg-735bbedb212b2c06fc8a35b4f64af2f3.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/12-Live and Coins/Diamond Collection.ogg"
+dest_files=["res://.godot/imported/Diamond Collection.ogg-735bbedb212b2c06fc8a35b4f64af2f3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

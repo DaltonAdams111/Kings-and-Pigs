@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cyhd52shr0kii"]
+[gd_scene load_steps=23 format=3 uid="uid://cyhd52shr0kii"]
 
 [ext_resource type="PackedScene" uid="uid://dqyp6le4hgtlr" path="res://scenes/Collectables/collectable.tscn" id="1_sg2ap"]
 [ext_resource type="Texture2D" uid="uid://deoo1epa3h07c" path="res://assets/12-Live and Coins/Big Diamond Idle (18x14).png" id="2_0jspg"]
 [ext_resource type="Script" uid="uid://bt0dnct5bmklu" path="res://scenes/Collectables/Diamond/collectable_diamond.gd" id="2_jfbau"]
 [ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="3_jfbau"]
+[ext_resource type="AudioStream" uid="uid://c6pv8e85vt0v8" path="res://assets/12-Live and Coins/Diamond Collision.ogg" id="5_iofbj"]
+[ext_resource type="AudioStream" uid="uid://buesipixnnhqf" path="res://assets/12-Live and Coins/Diamond Collection.ogg" id="6_ur2kl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0jspg"]
 radius = 8.0
@@ -89,7 +91,131 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ge4n"]
 radius = 6.0
 
+[sub_resource type="Animation" id="Animation_jfbau"]
+resource_name = "collect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:freeze")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollectionSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fdudl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:freeze")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollectionSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iofbj"]
+_data = {
+&"RESET": SubResource("Animation_fdudl"),
+&"collect": SubResource("Animation_jfbau")
+}
+
 [node name="CollectableDiamond" instance=ExtResource("1_sg2ap")]
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("2_jfbau")
 item = ExtResource("3_jfbau")
 
@@ -107,4 +233,22 @@ collision_masks = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent" index="0"]
 shape = SubResource("CircleShape2D_8ge4n")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_iofbj")
+}
+
+[node name="CollisionSound" type="AudioStreamPlayer2D" parent="." index="6"]
+stream = ExtResource("5_iofbj")
+volume_db = -12.0
+max_distance = 1000.0
+attenuation = 5.0
+
+[node name="CollectionSound" type="AudioStreamPlayer2D" parent="." index="7"]
+stream = ExtResource("6_ur2kl")
+volume_db = -6.0
+max_distance = 1000.0
+attenuation = 3.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="collected" from="." to="." method="_on_collected"]
