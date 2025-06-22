@@ -12,6 +12,7 @@ class_name Bomb
 @onready var explosion_delay_timer: Timer = $ExplosionDelayTimer
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var attack_component: AttackComponent = $AttackComponent
+@onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
 
 
 func _ready() -> void:
@@ -28,4 +29,5 @@ func _on_hurtbox_component_area_entered(area: Area2D) -> void:
 
 
 func _on_explosion_delay_timer_timeout() -> void:
+	explosion_sound.pitch_scale = randf_range(0.95, 1.05)
 	animation_player.play("explode")
