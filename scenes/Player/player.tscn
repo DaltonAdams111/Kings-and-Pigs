@@ -939,7 +939,7 @@ _data = {
 resource_local_to_scene = true
 script = ExtResource("26_4ni0x")
 item = ExtResource("27_kp55c")
-item_count = 5
+item_count = 10
 metadata/_custom_type_script = "uid://kjehr0uxxlhm"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_18ciy"]

@@ -13,6 +13,7 @@ func enter() -> void:
 	
 	animation_player.speed_scale = 1
 	animation_player.play("hit")
+	player.player_camera.shake(2.5, 5.0)
 
 
 func exit() -> void:

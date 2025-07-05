@@ -14,7 +14,7 @@ func enter() -> void:
 	animation_player.speed_scale = 1
 	animation_player.play("land")
 	player.velocity.x = 0
-	player.player_camera.shake(player.fall_distance / player.FALL_DISTANCE_THRESHOLD)
+	player.player_camera.shake((player.fall_distance / player.FALL_DISTANCE_THRESHOLD) / 2, 5.0)
 	player.fall_distance = 0.0
 
 

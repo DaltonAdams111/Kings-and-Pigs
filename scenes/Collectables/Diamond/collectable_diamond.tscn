@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://deoo1epa3h07c" path="res://assets/12-Live and Coins/Big Diamond Idle (18x14).png" id="2_0jspg"]
 [ext_resource type="Script" uid="uid://bt0dnct5bmklu" path="res://scenes/Collectables/Diamond/collectable_diamond.gd" id="2_jfbau"]
 [ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="3_jfbau"]
-[ext_resource type="AudioStream" uid="uid://c6pv8e85vt0v8" path="res://assets/12-Live and Coins/Diamond Collision.ogg" id="5_iofbj"]
-[ext_resource type="AudioStream" uid="uid://buesipixnnhqf" path="res://assets/12-Live and Coins/Diamond Collection.ogg" id="6_ur2kl"]
+[ext_resource type="AudioStream" uid="uid://ctarit4n6ljpc" path="res://assets/12-Live and Coins/diamond_collision.ogg" id="5_iofbj"]
+[ext_resource type="AudioStream" uid="uid://djgacphgf8mem" path="res://assets/12-Live and Coins/diamond_collection.ogg" id="6_ur2kl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0jspg"]
 radius = 8.0

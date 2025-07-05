@@ -82,7 +82,7 @@ func _get_property_list() -> Array[Dictionary]:
 			"type": TYPE_INT,
 			"usage": PROPERTY_USAGE_DEFAULT,
 			"hint": PROPERTY_HINT_RANGE,
-			"hint_string": "0, 100, 1, or_greater"
+			"hint_string": "0, 100"
 		})
 	else:
 		item_count = 1

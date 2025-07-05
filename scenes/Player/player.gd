@@ -25,7 +25,7 @@ class_name  Player
 @onready var attack_component: AttackComponent = $AttackComponent
 
 ## Valid [State](s) that the player can enter doors from.
-@export var enter_door_states: Array[State]
+@export var enter_door_states: Array[State] = []
 
 
 const SPRITE_OFFSET_X: float = 7.0
