@@ -6,6 +6,8 @@ class_name Door
 ## Door that allows traveling from one level to another.
 
 
+var game: Game
+
 ## If [code]true[/code], the [Player] can interact with this door.
 @export var interactable: bool = false:
 	set(value):
@@ -26,6 +28,8 @@ var target_level_path: String = "":
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		$LevelLabel.hide()
+	
+	game = get_tree().root.find_child("Game", true, false)
 
 
 func _input(event: InputEvent) -> void:
@@ -38,7 +42,7 @@ func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("enter_door"):
 		return
 	
-	var player: Player = Game.get_player()
+	var player: Player = Globals.player
 	
 	if not player in get_overlapping_bodies():
 		return
@@ -55,7 +59,7 @@ func _input(event: InputEvent) -> void:
 	player.state_machine.change_state("doorin")
 	await player.animation_player.animation_finished
 	
-	Game.level_transition(target_level_path)
+	game.level_transition(target_level_path)
 
 
 ## Plays the [Door]'s "opening" animation and starts its [member door_open_timer].

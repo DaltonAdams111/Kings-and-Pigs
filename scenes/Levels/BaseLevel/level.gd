@@ -2,6 +2,8 @@ extends Node2D
 class_name Level
 
 
+var game: Game = null
+
 @export var spawn_door: Door = null
 
 @onready var terrain_layer: TileMapLayer = $TileMapLayers/TerrainLayer
@@ -13,7 +15,10 @@ class_name Level
 
 
 func spawn_player():
-	var player: Player = Game.get_player()
+	if not Globals.player:
+		game.load_player()
+	
+	var player: Player = Globals.player
 	
 	player.state_machine.change_state("doorout")
 	player.velocity = Vector2.ZERO

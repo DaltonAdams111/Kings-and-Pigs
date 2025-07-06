@@ -1,0 +1,181 @@
+[33mcommit fc9b8b7a9fde5dadcd9851f68a0c4040595c12f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jul 5 19:28:38 2025 -0500
+
+    updated test_level
+
+[33mcommit dcf5645a7d58a2045f8eb7f2d49fa28168e664de[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jul 5 16:54:32 2025 -0500
+
+    adjusted camera shake method
+
+[33mcommit ac5eb349aa775f958c7c2d8b179e31a7e64d1b5d[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sun Jun 22 01:13:45 2025 -0500
+
+    added bomb explosion sound effect
+
+[33mcommit 480957906a6d53257b99a5a0c2a241419f4a1411[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 21 22:24:04 2025 -0500
+
+    added diamond sounds
+    
+    created and added collection and collision sounds for diamonds.
+    implimented the sound affects for diamonds.
+
+[33mcommit 87fbf75c4d296de071664aa0e6358e9acd15d306[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 21 03:36:01 2025 -0500
+
+    fixed bug with inventory component, reworked player ui updates, implimented player hit state
+    
+    simplified setting inventory component's 'is_empty', fixed bug causing the inventory to be wiped when _ready().
+    
+    added new methods for updating the player's ui.
+    
+    player now enters the 'hit' state when being hit.
+
+[33mcommit 6b16270ae9a906f113bbb94fecb474f06fbc87e1[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 21 01:54:03 2025 -0500
+
+    added additional functionality and error checking to inventory component, updated item spawning
+    
+    added 'is_empty' boolean property to inventory component to tell at a glance if the inventory is empty.
+    used the 'is_empty' property internally for early returns on inventory component methods.
+    
+    updated level and item slot scripts to allow the spawning of objects, not just collectables.
+
+[33mcommit 516043a0702da4846834485a362c41dd44b0fcef[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 21 00:51:25 2025 -0500
+
+    updated readme
+
+[33mcommit c61b7a4104d045ada925baa500816e8b9912f292[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 21 00:50:35 2025 -0500
+
+    added readme
+
+[33mcommit 381ad25e49b0a9d58fd40d4a55385a3f0c00333d[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 21 00:44:55 2025 -0500
+
+    added bomb object, tweaked player and object physics
+    
+    added bombs that can explode, dealing damage to nearby entities.
+    tweaked player movement physics to work more smoothly with other physics bodies.
+    player can now apply physics impulses to physics objects, currently only bombs.
+
+[33mcommit 521ad99ec3b6797cc844750bd04b33f51460feef[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Fri Jun 20 13:37:06 2025 -0500
+
+    added tool script to generate doors for levels
+    
+    removes need to manually instantiate, name, or set spawn door of level
+
+[33mcommit f07b87d0d6a5494c518ab5d3b75016b341b31767[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Thu Jun 19 23:47:10 2025 -0500
+
+    removed unecessary calls of 'randomize()' to improve item spawning performance.
+
+[33mcommit 7045e33c5848b84ae793cc705a572075289885a3[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 14 21:02:14 2025 -0500
+
+    cleaned up old level scripts, updated base level scene, implimented basic controller functionality
+
+[33mcommit ee0da8faa95c4c8d045e8e47b8b1e195703ae455[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 14 14:43:40 2025 -0500
+
+    updated collectable collision, reworked attack and hurtbox components, optimized item spawning
+
+[33mcommit 93476a2d20281a22cdb0565d990517c130b83cd7[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 14 03:52:53 2025 -0500
+
+    added diamond UI element, implimented tracking and updating UI elements
+
+[33mcommit 433b2c528ddb95660082751ac1d9f19c93711caa[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 14 00:53:29 2025 -0500
+
+    prep work for implimenting enemies, tweaked collectable collision monitoring, removed "test_object"
+
+[33mcommit b8f5e6d2c104764ca6f95b4eee736cf2ee3e69bc[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Wed Jun 11 19:54:57 2025 -0500
+
+    added box object, fixed typos
+
+[33mcommit 8a4fa1befd96907244e2159266ae7296f2d2dbb4[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 7 22:50:27 2025 -0500
+
+    polished item spawning and adding collectables to levels
+
+[33mcommit 0bf7079caa53746b90969d9b8ac72476ba554bc6[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 7 18:15:15 2025 -0500
+
+    updated item spawning, added additional 'null' checks
+
+[33mcommit 1ceb4c052b8b7b815685b8bf54bf722d55795c95[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 7 15:26:29 2025 -0500
+
+    cleaned up loose files
+
+[33mcommit f7e0305dfdc06257b249faa388cfd11f39a5ef8d[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sat Jun 7 02:32:59 2025 -0500
+
+    updated collectable system, reworked level_scene tree, implimented item spawning
+
+[33mcommit df6abe6858394fccd8bf81ba7d17a20d20109135[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Thu Jun 5 22:24:10 2025 -0500
+
+    implimented heart and diamond items and scenes; updated player UI
+
+[33mcommit ba1a94ea02f22d7bd65a8e371031d316c2d947c1[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Wed Jun 4 23:47:15 2025 -0500
+
+    implimented additional inventory features
+
+[33mcommit 342b8281b43b117d258088d332658d621e6cfbbc[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Mon Jun 2 21:33:53 2025 -0500
+
+    reworked item/inventory system (again). Made more modular
+
+[33mcommit 6e70af1da19a8ce263f49fbf7dc47c192f7fc90f[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Sun Jun 1 17:02:56 2025 -0500
+
+    started implimenting inventory and collectable systems
+
+[33mcommit be7ff71e5659bfc8b91bec7d18947e4e67a71c8d[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Fri May 30 22:36:31 2025 -0500
+
+    updated level transitions 'again'
+
+[33mcommit 93e39630477c0931cf349debd1fe697f84276752[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Fri May 30 20:27:13 2025 -0500
+
+    updated level changing
+
+[33mcommit 78404cf9af40119adf4a7ae9c4453a98f5d1ab68[m
+Author: Dalton <daltonadams111@gmail.com>
+Date:   Tue May 27 19:52:01 2025 -0500
+
+    first commit

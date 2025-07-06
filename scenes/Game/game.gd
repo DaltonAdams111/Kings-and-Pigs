@@ -1,4 +1,5 @@
 extends Node
+class_name Game
 
 
 signal game_ready
@@ -8,9 +9,6 @@ signal game_ready
 
 const PLAYER_SCENE_PATH: String = "res://scenes/Player/player.tscn"
 
-var current_level: Level = null
-var player: Player = null
-
 
 func _ready() -> void:
 	load_player()
@@ -18,26 +16,23 @@ func _ready() -> void:
 
 
 func level_transition(new_level_path: String):
-	if current_level:
-		current_level.queue_free()
+	if Globals.current_level:
+		Globals.current_level.queue_free()
 	
 	var new_level: Level = load(new_level_path).instantiate()
-	current_level = new_level
+	new_level.game = self
+	Globals.current_level = new_level
 	
-	level_group.add_child(current_level)
-	current_level.spawn_player()
+	level_group.add_child(Globals.current_level)
+	Globals.current_level.spawn_player()
 
 
 func load_player():
-	if player:
-		player.queue_free()
+	if Globals.player:
+		Globals.player.queue_free()
 	
-	player = load(PLAYER_SCENE_PATH).instantiate()
-	player_group.add_child(player)
-
-
-func get_player():
-	return player
+	Globals.player = load(PLAYER_SCENE_PATH).instantiate()
+	player_group.add_child(Globals.player)
 
 
 func _on_ready() -> void:
