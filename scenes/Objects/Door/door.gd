@@ -26,9 +26,10 @@ var target_level_path: String = "":
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
-		$LevelLabel.hide()
+	if Engine.is_editor_hint():
+		return
 	
+	$LevelLabel.hide()
 	game = get_tree().root.find_child("Game", true, false)
 
 
