@@ -1,12 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://d20dpi7eacbwb"]
+[gd_scene load_steps=4 format=3 uid="uid://d20dpi7eacbwb"]
 
 [ext_resource type="Script" uid="uid://cfmc3fqsk2d0a" path="res://scenes/Game/game.gd" id="1_0i15y"]
+[ext_resource type="PackedScene" uid="uid://btyoxpjrltte1" path="res://scenes/Game/main_menu.tscn" id="2_fc1p2"]
+[ext_resource type="PackedScene" uid="uid://brotmvaotu5uo" path="res://scenes/Game/pause_menu.tscn" id="3_bfxw3"]
 
 [node name="Game" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_0i15y")
 
 [node name="LevelGroup" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="PlayerGroup" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_fc1p2")]
+process_mode = 2
+visible = false
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_bfxw3")]
+process_mode = 2
+visible = false
 
 [connection signal="ready" from="." to="." method="_on_ready"]

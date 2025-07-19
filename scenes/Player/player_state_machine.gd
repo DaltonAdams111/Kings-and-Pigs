@@ -25,9 +25,6 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Globals.paused:
-		return
-	
 	if not current_state:
 		return
 	

@@ -43,7 +43,7 @@ func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("enter_door"):
 		return
 	
-	var player: Player = Globals.player
+	var player: Player = Game.get_player()
 	
 	if not player in get_overlapping_bodies():
 		return
