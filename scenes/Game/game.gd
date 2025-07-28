@@ -72,6 +72,33 @@ func resume_game() -> void:
 	current_menu = null
 
 
+func open_main_menu() -> void:
+	clear_level_group()
+	clear_player_group()
+	
+	if current_menu:
+		current_menu.hide()
+	
+	paused = true
+	main_menu.show()
+	current_menu = main_menu
+
+
+func clear_level_group() -> void:
+	var children = level_group.get_children()
+	
+	for child in children:
+		child.queue_free()
+
+
+
+func clear_player_group() -> void:
+	var children = player_group.get_children()
+	
+	for child in children:
+		child.queue_free()
+
+
 func quit_game() -> void:
 	get_tree().quit()
 

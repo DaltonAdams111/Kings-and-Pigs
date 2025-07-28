@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://t4cabdckxifc"]
+
+[ext_resource type="PackedScene" uid="uid://r756311jbu85" path="res://scenes/Enemies/enemy.tscn" id="1_w5ta4"]
+[ext_resource type="Script" uid="uid://bcl1jcf23uy1f" path="res://scenes/Enemies/Cannon/cannon.gd" id="2_c3nqt"]
+[ext_resource type="Texture2D" uid="uid://cyom6v5ktpk4r" path="res://assets/10-Cannon/Idle.png" id="2_cnf08"]
+[ext_resource type="Script" uid="uid://kjehr0uxxlhm" path="res://scenes/Components/InventoryComponent/item_slot.gd" id="2_eunen"]
+[ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="3_cnf08"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eunen"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="Resource" id="Resource_c3nqt"]
+resource_local_to_scene = true
+script = ExtResource("2_eunen")
+item = ExtResource("3_cnf08")
+item_count = 10
+metadata/_custom_type_script = "uid://kjehr0uxxlhm"
+
+[node name="Cannon" instance=ExtResource("1_w5ta4")]
+script = ExtResource("2_c3nqt")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_cnf08")
+offset = Vector2(8, -11)
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2(0, -9)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_eunen")
+
+[node name="InventoryComponent" parent="." index="5"]
+inventory = Array[ExtResource("2_eunen")]([SubResource("Resource_c3nqt")])
