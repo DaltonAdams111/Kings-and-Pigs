@@ -9,10 +9,13 @@ class_name CollectableDiamond
 
 func _on_collected(_body: Node2D, inventory: InventoryComponent) -> void:
 	inventory.add_item(item, 1)
-	collection_sound.pitch_scale = randf_range(0.95, 1.05)
+	collection_sound.pitch_scale = randf_range(0.98, 1.02)
 	animation_player.play("collect")
 
 
 func _on_body_entered(_body: Node) -> void:
-	collision_sound.pitch_scale = randf_range(0.95, 1.05)
+	if not is_spawned and not collect_delay_timer.is_stopped():
+		return
+	
+	collision_sound.pitch_scale = randf_range(0.98, 1.02)
 	collision_sound.play()

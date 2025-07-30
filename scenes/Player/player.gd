@@ -6,7 +6,7 @@ class_name  Player
 
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var collision_shape_2d: CollisionShape2D = $AttackComponent/CollisionShape2D
+@onready var attack_collision_shape_2d: CollisionShape2D = $AttackComponent/CollisionShape2D
 @onready var floor_ray_cast: RayCast2D = $FloorRayCast
 @onready var door_ray_cast: RayCast2D = $DoorRayCast
 @onready var player_camera: PlayerCamera = $PlayerCamera
@@ -102,11 +102,11 @@ func move(delta: float, flip_sprite: bool = false) -> void:
 	if direction > 0:
 		sprite_2d.flip_h = false
 		sprite_2d.offset.x = SPRITE_OFFSET_X
-		collision_shape_2d.position.x = ATTACK_AREA_POSITION_X
+		attack_collision_shape_2d.position.x = ATTACK_AREA_POSITION_X
 	elif direction < 0:
 		sprite_2d.flip_h = true
 		sprite_2d.offset.x = -SPRITE_OFFSET_X
-		collision_shape_2d.position.x = -ATTACK_AREA_POSITION_X
+		attack_collision_shape_2d.position.x = -ATTACK_AREA_POSITION_X
 
 
 func apply_gravity(delta: float, gravity_multiplier: float = 1.0):

@@ -13,6 +13,8 @@ signal collected(body: Node2D, inventory: InventoryComponent)
 
 @export_range(0.0, 10.0, 1) var collection_delay_sec: float = 1.0
 
+var is_spawned: bool = false
+
 
 func _ready() -> void:
 	collectable_component.monitoring = false

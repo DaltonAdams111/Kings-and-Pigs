@@ -9,7 +9,7 @@ class_name Item
 ## The name of this [Item].
 @export var name: String = ""
 
-##
+## Wheather or not this [Item] can have an [member ItemSlot.item_count] greater than 1 in a single [ItemSlot]
 @export var is_stackable: bool = false:
 	set(value):
 		is_stackable = value
