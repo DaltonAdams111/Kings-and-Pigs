@@ -1,4 +1,4 @@
-extends Node
+extends State
 class_name StateMachine
 
 ## Manages a collection of states.
@@ -38,7 +38,7 @@ func get_states() -> Dictionary[String, State]:
 
 
 ## Changes the current active State.
-func change_state(new_state_name: String, override: bool = false) -> void:
+func change_to_state(new_state_name: String, override: bool = false) -> void:
 	if not states.has(new_state_name.to_lower()):
 		return
 	

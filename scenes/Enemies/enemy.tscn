@@ -45,3 +45,5 @@ attacked_by_collision = 514
 
 [node name="AttackComponent" parent="." instance=ExtResource("2_8swre")]
 visible = true
+
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

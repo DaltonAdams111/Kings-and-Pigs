@@ -10,11 +10,11 @@ func _ready() -> void:
 	states = get_states()
 	
 	for state in states:
-		states[state].change_state.connect(change_state)
+		states[state].change_state.connect(change_to_state)
 		states[state].state_machine = self
 	
 	if default_state:
-		change_state(default_state.name, true)
+		change_to_state(default_state.name, true)
 
 
 func _process(delta: float) -> void:

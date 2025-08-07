@@ -82,6 +82,17 @@ func decelerate(delta: float):
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * 0.8)
 
 
+func flip() -> void:
+	if direction > 0:
+		sprite_2d.flip_h = false
+		sprite_2d.offset.x = SPRITE_OFFSET_X
+		attack_collision_shape_2d.position.x = ATTACK_AREA_POSITION_X
+	elif direction < 0:
+		sprite_2d.flip_h = true
+		sprite_2d.offset.x = -SPRITE_OFFSET_X
+		attack_collision_shape_2d.position.x = -ATTACK_AREA_POSITION_X
+
+
 func move(delta: float, flip_sprite: bool = false) -> void:
 	if can_fall_through_platform() and Input.is_action_pressed("move_down"):
 		position.y += 1.25
@@ -99,14 +110,7 @@ func move(delta: float, flip_sprite: bool = false) -> void:
 	if not flip_sprite:
 		return
 	
-	if direction > 0:
-		sprite_2d.flip_h = false
-		sprite_2d.offset.x = SPRITE_OFFSET_X
-		attack_collision_shape_2d.position.x = ATTACK_AREA_POSITION_X
-	elif direction < 0:
-		sprite_2d.flip_h = true
-		sprite_2d.offset.x = -SPRITE_OFFSET_X
-		attack_collision_shape_2d.position.x = -ATTACK_AREA_POSITION_X
+	flip()
 
 
 func apply_gravity(delta: float, gravity_multiplier: float = 1.0):
@@ -176,4 +180,4 @@ func update_health_ui() -> void:
 
 
 func _on_hurtbox_component_hit(_damage_amount: int) -> void:
-	state_machine.change_state("hit")
+	state_machine.change_to_state("hit")

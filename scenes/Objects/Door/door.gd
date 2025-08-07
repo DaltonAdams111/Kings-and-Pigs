@@ -57,7 +57,7 @@ func _input(event: InputEvent) -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(player, "global_position", global_position, 0.25)
 	
-	player.state_machine.change_state("doorin")
+	player.state_machine.change_to_state("doorin")
 	await player.animation_player.animation_finished
 	
 	game.level_transition(target_level_path)
