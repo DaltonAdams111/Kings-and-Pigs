@@ -1,6 +1,10 @@
 extends StateMachine
 
 
+func _init() -> void:
+	set_process(false)
+
+
 func _ready() -> void:
 	states = get_states()
 	
@@ -23,3 +27,21 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	current_state.physics_update(delta)
+
+
+func enter() -> void:
+	set_process(true)
+	set_physics_process(true)
+
+
+func exit() -> void:
+	set_process(false)
+	set_physics_process(false)
+
+
+func update(_delta: float) -> void:
+	pass
+
+
+func physics_update(_delta: float) -> void:
+	pass

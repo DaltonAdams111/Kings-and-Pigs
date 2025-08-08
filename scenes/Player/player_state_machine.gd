@@ -15,6 +15,9 @@ func _ready() -> void:
 	
 	if default_state:
 		change_to_state(default_state.name, true)
+	
+	set_process(false)
+	set_physics_process(false)
 
 
 func _process(delta: float) -> void:
@@ -29,3 +32,21 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	current_state.physics_update(delta)
+
+
+func enter() -> void:
+	set_process(true)
+	set_physics_process(true)
+
+
+func exit() -> void:
+	set_process(false)
+	set_physics_process(false)
+
+
+func update(_delta: float) -> void:
+	pass
+
+
+func physics_update(_delta: float) -> void:
+	pass
