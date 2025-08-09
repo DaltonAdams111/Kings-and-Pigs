@@ -29,8 +29,9 @@ func _physics_process(_delta: float) -> void:
 
 func _on_collectable_component_collected(body: Node2D, inventory: InventoryComponent) -> void:
 	collected.emit(body, inventory)
+	collectable_component.set_deferred("monitoring", false)
 
 
 func _on_collect_delay_timer_timeout() -> void:
 	animated_sprite_2d.play("idle")
-	collectable_component.monitoring = true
+	collectable_component.set_deferred("monitoring", true)

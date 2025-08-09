@@ -19,7 +19,7 @@ class_name  Player
 @onready var inventory_component: InventoryComponent = $InventoryComponent
 ## [HealthComponent] for managing the player's health.
 @onready var health_component: HealthComponent = $HealthComponent
-## [HurtboxComponent] for detecting collisions from attacks and updating the player's [member health_component].
+## [HurtboxComponent] for detecting collisions from attacks.
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 ## [AttackComponent] for defining the player's attack area and attack damage.
 @onready var attack_component: AttackComponent = $AttackComponent
@@ -103,10 +103,16 @@ func move(delta: float, flip_sprite: bool = false) -> void:
 	if not direction:
 		return
 	
-	var opposite_direction: bool = direction and velocity.x != 0 and sign(direction) != sign(velocity.x)
+	var opposite_direction: bool = (
+			direction and velocity.x != 0 and sign(direction) != sign(velocity.x)
+			)
 	var acceleration_multiplier: float = 2.0 if (opposite_direction and is_on_floor()) else 1.0
 	
-	velocity.x = move_toward(velocity.x, MOVEMENT_SPEED * direction, ACCELERATION * delta * acceleration_multiplier)
+	velocity.x = move_toward(
+		velocity.x,
+		MOVEMENT_SPEED * direction,
+		ACCELERATION * delta * acceleration_multiplier
+		)
 	
 	if not flip_sprite:
 		return
@@ -152,9 +158,6 @@ func update_diamonds_ui() -> void:
 		player_ui.update_diamonds(diamond_slot.item_count)
 	else:
 		player_ui.update_diamonds(0)
-	
-	for slot in inventory_component.inventory:
-		print("%s_%d: %d"%[slot.item.name, inventory_component.inventory.find(slot), slot.item_count])
 
 
 func _input(event: InputEvent) -> void:
