@@ -30,6 +30,7 @@ tile_set = ExtResource("2_muv8p")
 tile_set = ExtResource("2_muv8p")
 
 [node name="EnemiesLayer" type="TileMapLayer" parent="TileMapLayers"]
+tile_set = ExtResource("2_muv8p")
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 collision_layer = 4096

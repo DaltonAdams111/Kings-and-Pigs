@@ -17,7 +17,11 @@ metadata/_custom_type_script = "uid://kjehr0uxxlhm"
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 16
-collision_mask = 257
+collision_mask = 4352
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_max_angle = 1.0472
+platform_floor_layers = 4294905856
 script = ExtResource("1_8swre")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

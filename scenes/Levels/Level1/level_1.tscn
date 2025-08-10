@@ -23,10 +23,10 @@ target_level_path = "res://scenes/Levels/LevelTest/level_test.tscn"
 tile_map_data = PackedByteArray("AADo/+H/AQACAAMAAADz/+H/AQAEAAMAAADw/9v/AQABAAEAAADw/9z/AQABAAIAAADw/93/AQABAAMAAAA=")
 
 [node name="ObjectsLayer" parent="TileMapLayers" index="3"]
-tile_map_data = PackedByteArray("AADn/+L/AwAAAAAAAgDn/+H/AwAAAAAAAgDo/+L/AwAAAAAAAgD0/+L/BAAAAAAAAwA=")
+tile_map_data = PackedByteArray("AADn/+L/AwAAAAAAAgDn/+H/AwAAAAAAAgDo/+L/AwAAAAAAAgA=")
 
 [node name="CollectablesLayer" parent="TileMapLayers" index="4"]
-tile_map_data = PackedByteArray("AADx/9z/BAAAAAAAAwDw/97/BAAAAAAAAwA=")
+tile_map_data = PackedByteArray("AADx/9z/BAAAAAAAAwDw/97/BAAAAAAAAwDv/+L/BAAAAAAABADz/+L/BAAAAAAAAwD0/+L/BAAAAAAAAwDt/9z/BAAAAAAAAwA=")
 
 [node name="JumpLabel" type="Label" parent="." index="2"]
 offset_left = -624.0
@@ -37,3 +37,15 @@ theme_override_font_sizes/font_size = 8
 text = "Press \"INPUT\" to jump"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="body_entered" from="TileMapLayers/CollectablesLayer/CollectableDiamond" to="TileMapLayers/CollectablesLayer/CollectableDiamond" method="_on_body_entered"]
+[connection signal="collected" from="TileMapLayers/CollectablesLayer/CollectableDiamond" to="TileMapLayers/CollectablesLayer/CollectableDiamond" method="_on_collected"]
+[connection signal="body_entered" from="TileMapLayers/CollectablesLayer/@RigidBody2D@38304" to="TileMapLayers/CollectablesLayer/@RigidBody2D@38304" method="_on_body_entered"]
+[connection signal="collected" from="TileMapLayers/CollectablesLayer/@RigidBody2D@38304" to="TileMapLayers/CollectablesLayer/@RigidBody2D@38304" method="_on_collected"]
+[connection signal="collected" from="TileMapLayers/CollectablesLayer/CollectableHeart" to="TileMapLayers/CollectablesLayer/CollectableHeart" method="_on_collected"]
+[connection signal="body_entered" from="TileMapLayers/CollectablesLayer/@RigidBody2D@39387" to="TileMapLayers/CollectablesLayer/@RigidBody2D@39387" method="_on_body_entered"]
+[connection signal="collected" from="TileMapLayers/CollectablesLayer/@RigidBody2D@39387" to="TileMapLayers/CollectablesLayer/@RigidBody2D@39387" method="_on_collected"]
+[connection signal="body_entered" from="TileMapLayers/CollectablesLayer/@RigidBody2D@39388" to="TileMapLayers/CollectablesLayer/@RigidBody2D@39388" method="_on_body_entered"]
+[connection signal="collected" from="TileMapLayers/CollectablesLayer/@RigidBody2D@39388" to="TileMapLayers/CollectablesLayer/@RigidBody2D@39388" method="_on_collected"]
+[connection signal="body_entered" from="TileMapLayers/CollectablesLayer/@RigidBody2D@39389" to="TileMapLayers/CollectablesLayer/@RigidBody2D@39389" method="_on_body_entered"]
+[connection signal="collected" from="TileMapLayers/CollectablesLayer/@RigidBody2D@39389" to="TileMapLayers/CollectablesLayer/@RigidBody2D@39389" method="_on_collected"]

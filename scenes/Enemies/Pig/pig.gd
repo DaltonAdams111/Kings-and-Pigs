@@ -6,19 +6,20 @@ class_name Pig
 @onready var attack_collision_shape_2d: CollisionShape2D = $AttackComponent/CollisionShape2D
 
 
+func _physics_process(delta: float) -> void:
+	direction = Input.get_axis("move_left", "move_right")
+	move(delta, Vector2.ZERO,true)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		jump()
+
+
 func flip() -> void:
 	super.flip()
 	attack_collision_shape_2d.position.x = -attack_collision_shape_2d.position.x
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("enter_door"):
-		flip()
-	
-	if event.is_action_pressed("attack") and can_attack:
-		can_attack = false
-		animation_player.play("attack")
-		attack_cooldown_timer.start()
-		animation_player.queue("idle")
-	
-	
+func move(delta, _target_position: Vector2, _flip_sprite: bool) -> void:
+	super.move(delta, _target_position, _flip_sprite)

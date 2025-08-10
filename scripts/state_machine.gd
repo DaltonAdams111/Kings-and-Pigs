@@ -7,6 +7,17 @@ class_name StateMachine
 ## Initial State to start in upon loading the scene.
 @export var default_state: State
 
+## If [code]true[/code], this [StateMachine] has its processing enabled.[br][br]
+var processing_enabled: bool = false:
+	set(value):
+		processing_enabled = value
+		
+		if processing_enabled:
+			set_process(true)
+			set_physics_process(true)
+		else:
+			set_process(false)
+			set_physics_process(false)
 
 ## Dictionary of available States.[br]
 ## [br]

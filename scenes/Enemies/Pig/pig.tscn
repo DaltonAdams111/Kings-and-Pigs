@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://chscb8a4m8pf8"]
+[gd_scene load_steps=31 format=3 uid="uid://chscb8a4m8pf8"]
 
 [ext_resource type="PackedScene" uid="uid://r756311jbu85" path="res://scenes/Enemies/enemy.tscn" id="1_rye73"]
 [ext_resource type="Script" uid="uid://kjehr0uxxlhm" path="res://scenes/Components/InventoryComponent/item_slot.gd" id="2_8bpml"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://dp6dblar5sf28" path="res://assets/03-Pig/Hit (34x28).png" id="8_t6bhy"]
 [ext_resource type="Texture2D" uid="uid://4ri6qcyjjkeh" path="res://assets/03-Pig/Jump (34x28).png" id="9_ujlgf"]
 [ext_resource type="Texture2D" uid="uid://kibt85kcoruq" path="res://assets/03-Pig/Run (34x28).png" id="10_lv6gf"]
+[ext_resource type="Script" uid="uid://ds2ew3kl7dt41" path="res://scenes/Enemies/Pig/state_machine.gd" id="11_6kluh"]
+[ext_resource type="Script" uid="uid://6uftwdhwqgib" path="res://scenes/Enemies/Pig/passive_state_machine.gd" id="12_f4qso"]
+[ext_resource type="Script" uid="uid://dc04ocvmoa58h" path="res://scenes/Enemies/Pig/idle.gd" id="13_4tpb3"]
+[ext_resource type="Script" uid="uid://0n2bdtk7kxg3" path="res://scenes/Enemies/Pig/run.gd" id="14_byfu2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yijkd"]
 radius = 6.0
@@ -723,7 +727,7 @@ _data = {
 &"run": SubResource("Animation_6kluh")
 }
 
-[sub_resource type="Resource" id="Resource_lv6gf"]
+[sub_resource type="Resource" id="Resource_byfu2"]
 resource_local_to_scene = true
 script = ExtResource("2_8bpml")
 item = ExtResource("3_yijkd")
@@ -740,6 +744,9 @@ height = 22.0
 
 [node name="Pig" instance=ExtResource("1_rye73")]
 script = ExtResource("2_fpadl")
+jump_velocity = -250.0
+movement_speed = 100.0
+acceleration = 250.0
 attack_cooldown = 3.0
 
 [node name="Sprite2D" parent="." index="0"]
@@ -749,7 +756,6 @@ flip_h = true
 hframes = 11
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_yijkd")
 
@@ -759,8 +765,30 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("enemy", "animation_player", "default_state")]
+script = ExtResource("11_6kluh")
+enemy = NodePath("..")
+animation_player = NodePath("../AnimationPlayer")
+default_state = NodePath("PassiveStateMachine")
+
+[node name="PassiveStateMachine" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy", "animation_player", "default_state")]
+script = ExtResource("12_f4qso")
+enemy = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+default_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine/PassiveStateMachine" index="0" node_paths=PackedStringArray("enemy", "animation_player")]
+script = ExtResource("13_4tpb3")
+enemy = NodePath("../../..")
+animation_player = NodePath("../../../AnimationPlayer")
+
+[node name="Run" type="Node" parent="StateMachine/PassiveStateMachine" index="1" node_paths=PackedStringArray("enemy", "animation_player")]
+script = ExtResource("14_byfu2")
+enemy = NodePath("../../..")
+animation_player = NodePath("../../../AnimationPlayer")
+
 [node name="InventoryComponent" parent="." index="5"]
-inventory = Array[ExtResource("2_8bpml")]([SubResource("Resource_lv6gf")])
+inventory = Array[ExtResource("2_8bpml")]([SubResource("Resource_byfu2")])
 
 [node name="HurtboxComponent" parent="." index="7"]
 visible = false

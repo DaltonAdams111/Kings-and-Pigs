@@ -53,7 +53,7 @@ var can_enter_door: bool = false
 
 
 func _ready() -> void:
-	state_machine.enter()
+	state_machine.processing_enabled = true
 	update_health_ui()
 	update_diamonds_ui()
 
