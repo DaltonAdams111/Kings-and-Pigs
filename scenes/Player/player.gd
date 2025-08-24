@@ -171,6 +171,7 @@ func _input(event: InputEvent) -> void:
 	if item:
 		inventory_component.spawn_items(item, global_position + Vector2(0, -25))
 
+
 func _on_health_component_health_changed(_new_health: int) -> void:
 	update_health_ui()
 

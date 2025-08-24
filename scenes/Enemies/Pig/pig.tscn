@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://chscb8a4m8pf8"]
+[gd_scene load_steps=32 format=3 uid="uid://chscb8a4m8pf8"]
 
 [ext_resource type="PackedScene" uid="uid://r756311jbu85" path="res://scenes/Enemies/enemy.tscn" id="1_rye73"]
 [ext_resource type="Script" uid="uid://kjehr0uxxlhm" path="res://scenes/Components/InventoryComponent/item_slot.gd" id="2_8bpml"]
@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://4ri6qcyjjkeh" path="res://assets/03-Pig/Jump (34x28).png" id="9_ujlgf"]
 [ext_resource type="Texture2D" uid="uid://kibt85kcoruq" path="res://assets/03-Pig/Run (34x28).png" id="10_lv6gf"]
 [ext_resource type="Script" uid="uid://ds2ew3kl7dt41" path="res://scenes/Enemies/Pig/state_machine.gd" id="11_6kluh"]
-[ext_resource type="Script" uid="uid://6uftwdhwqgib" path="res://scenes/Enemies/Pig/passive_state_machine.gd" id="12_f4qso"]
-[ext_resource type="Script" uid="uid://dc04ocvmoa58h" path="res://scenes/Enemies/Pig/idle.gd" id="13_4tpb3"]
-[ext_resource type="Script" uid="uid://0n2bdtk7kxg3" path="res://scenes/Enemies/Pig/run.gd" id="14_byfu2"]
+[ext_resource type="Script" uid="uid://egl5wor0an8f" path="res://scenes/Enemies/Pig/wander_state.gd" id="12_f4qso"]
+[ext_resource type="Script" uid="uid://btof4x38ouyk0" path="res://scenes/Enemies/Pig/hit.gd" id="13_4tpb3"]
+[ext_resource type="Script" uid="uid://bm2ny3v4txnxg" path="res://scenes/Enemies/Pig/dead.gd" id="14_byfu2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yijkd"]
 radius = 6.0
@@ -175,7 +175,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_0h1cn"]
 resource_name = "dead"
-length = 0.4
+length = 2.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -232,10 +232,10 @@ tracks/4/path = NodePath("Sprite2D:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -248,6 +248,20 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_4ppg6"]
@@ -727,7 +741,7 @@ _data = {
 &"run": SubResource("Animation_6kluh")
 }
 
-[sub_resource type="Resource" id="Resource_byfu2"]
+[sub_resource type="Resource" id="Resource_f4qso"]
 resource_local_to_scene = true
 script = ExtResource("2_8bpml")
 item = ExtResource("3_yijkd")
@@ -742,12 +756,16 @@ height = 16.0
 radius = 5.0
 height = 22.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4qso"]
+size = Vector2(150, 30)
+
 [node name="Pig" instance=ExtResource("1_rye73")]
 script = ExtResource("2_fpadl")
-jump_velocity = -250.0
 movement_speed = 100.0
-acceleration = 250.0
+acceleration = 500.0
+deceleration = 400.0
 attack_cooldown = 3.0
+player_detection_timeout_sec = 2
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_yijkd")
@@ -765,42 +783,52 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("enemy", "animation_player", "default_state")]
+[node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("default_state")]
 script = ExtResource("11_6kluh")
-enemy = NodePath("..")
-animation_player = NodePath("../AnimationPlayer")
-default_state = NodePath("PassiveStateMachine")
+default_state = NodePath("Wander")
 
-[node name="PassiveStateMachine" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy", "animation_player", "default_state")]
+[node name="Wander" type="Node" parent="StateMachine" index="0"]
 script = ExtResource("12_f4qso")
-enemy = NodePath("../..")
-animation_player = NodePath("../../AnimationPlayer")
-default_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine/PassiveStateMachine" index="0" node_paths=PackedStringArray("enemy", "animation_player")]
+[node name="IdleTimer" type="Timer" parent="StateMachine/Wander" index="0"]
+one_shot = true
+
+[node name="Hit" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("13_4tpb3")
-enemy = NodePath("../../..")
-animation_player = NodePath("../../../AnimationPlayer")
 
-[node name="Run" type="Node" parent="StateMachine/PassiveStateMachine" index="1" node_paths=PackedStringArray("enemy", "animation_player")]
+[node name="Dead" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("14_byfu2")
-enemy = NodePath("../../..")
-animation_player = NodePath("../../../AnimationPlayer")
 
 [node name="InventoryComponent" parent="." index="5"]
-inventory = Array[ExtResource("2_8bpml")]([SubResource("Resource_byfu2")])
+inventory = Array[ExtResource("2_8bpml")]([SubResource("Resource_f4qso")])
+
+[node name="HealthComponent" parent="." index="6"]
+MAX_HEALTH = 2
 
 [node name="HurtboxComponent" parent="." index="7"]
-visible = false
-invulnerable_time_sec = 1.0
+invulnerable_time_sec = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="1"]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_fpadl")
 debug_color = Color(0.88568, 0.281802, 0.455202, 0.42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent" index="0"]
+[node name="AttackComponent" parent="." index="8"]
 position = Vector2(14, -15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent" index="0"]
 shape = SubResource("CapsuleShape2D_38hjt")
 disabled = true
 debug_color = Color(0.884243, 0.294058, 0.413057, 0.42)
+
+[node name="ObjectCollisionRayCast" parent="." index="9"]
+position = Vector2(0, -5)
+target_position = Vector2(12, 0)
+
+[node name="PlayerDetectionArea" parent="." index="10"]
+position = Vector2(50, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" index="0"]
+shape = SubResource("RectangleShape2D_f4qso")
+
+[connection signal="timeout" from="StateMachine/Wander/IdleTimer" to="StateMachine/Wander" method="_on_idle_timer_timeout"]

@@ -1,7 +1,6 @@
 extends Camera2D
 class_name PlayerCamera
 
-
 @onready var player: Player = $".."
 
 var RNG = RandomNumberGenerator.new()

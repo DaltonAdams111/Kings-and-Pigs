@@ -30,6 +30,7 @@ var states: Dictionary[String, State]
 
 ## Current active State.
 var current_state: State
+var previous_state: State
 
 
 ## Returns all child State nodes as a Dictionary.[br]
@@ -63,4 +64,5 @@ func change_to_state(new_state_name: String, override: bool = false) -> void:
 	
 	new_state.enter()
 	
+	previous_state = current_state
 	current_state = new_state

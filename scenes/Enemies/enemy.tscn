@@ -49,5 +49,25 @@ attacked_by_collision = 514
 
 [node name="AttackComponent" parent="." instance=ExtResource("2_8swre")]
 visible = true
+collision_layer = 32
+collision_mask = 4
+attack_damage = 1
+owner_collision = 32
+can_attack_collision = 4
+
+[node name="ObjectCollisionRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4352
+
+[node name="PlayerDetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="PlayerDetectionTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
+[connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_entered"]
+[connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_exited"]
+[connection signal="timeout" from="PlayerDetectionTimer" to="." method="_on_player_detection_timer_timeout"]
