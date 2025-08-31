@@ -36,7 +36,7 @@ func _on_hurtbox_component_hit(_damage_amount: int) -> void:
 
 
 func _on_health_component_health_depleted() -> void:
-	inventory_component.spawn_all_items(global_position)
+	await inventory_component.spawn_all_items(global_position)
 	for i in range(4):
 		var piece: BoxPiece = box_piece.instantiate()
 		Game.current_level.add_object(piece, global_position)
