@@ -114,7 +114,7 @@ func _on_player_detection_area_body_entered(_body: Node2D) -> void:
 
 
 func _on_player_detection_area_body_exited(_body: Node2D) -> void:
-	player_detection_timer.start(player_detection_timeout_sec)
+	player_detection_timer.start.call_deferred(player_detection_timeout_sec)
 
 
 func _on_player_detection_timer_timeout() -> void:
@@ -122,9 +122,9 @@ func _on_player_detection_timer_timeout() -> void:
 
 
 func _on_hurtbox_component_hit(_damage_amount: int) -> void:
-	animation_player.play("hit")
-	animation_player.queue("idle")
+	state_machine.change_to_state("hit")
 
 
 func _on_health_component_health_depleted() -> void:
+	await animation_player.animation_finished
 	state_machine.change_to_state("dead")

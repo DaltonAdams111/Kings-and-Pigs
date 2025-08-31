@@ -21,6 +21,7 @@ func spawn_player():
 	player.state_machine.change_to_state("doorout")
 	player.velocity = Vector2.ZERO
 	player.global_position = spawn_door.global_position
+	player.player_camera.reset_smoothing()
 	spawn_door.open_door()
 
 
@@ -29,7 +30,7 @@ func add_object(object: PhysicsObject, spawn_position: Vector2) -> void:
 		return
 	
 	object.global_position = spawn_position
-	objects_layer.add_child(object)
+	objects_layer.add_child.call_deferred(object, true)
 
 
 func add_collectable(collectable: Collectable, spawn_position: Vector2) -> void:
@@ -37,7 +38,7 @@ func add_collectable(collectable: Collectable, spawn_position: Vector2) -> void:
 		return
 	
 	collectable.global_position = spawn_position
-	collectables_layer.add_child(collectable)
+	collectables_layer.add_child.call_deferred(collectable, true)
 
 
 func add_enemy(enemy: Enemy, spawn_position: Vector2) -> void:
@@ -45,4 +46,4 @@ func add_enemy(enemy: Enemy, spawn_position: Vector2) -> void:
 		return
 	
 	enemy.global_position = spawn_position
-	enemies_layer.add_child(enemy)
+	enemies_layer.add_child.call_deferred(enemy, true)

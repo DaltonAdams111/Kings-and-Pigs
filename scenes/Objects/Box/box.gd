@@ -12,9 +12,10 @@ class_name Box
 @export var possible_number_of_items: int = 0
 var number_of_items: int = 0
 
+const box_piece: PackedScene = preload("res://scenes/Objects/Box/box_piece.tscn")
+
 
 func _ready() -> void:
-	randomize()
 	number_of_items = randi_range(0, possible_number_of_items)
 	randomize_items()
 	inventory_component.consolidate_items()
@@ -27,17 +28,22 @@ func _physics_process(_delta: float) -> void:
 
 func randomize_items() -> void:
 	for item in number_of_items:
-		randomize()
 		inventory_component.add_item(possible_items[randi() % len(possible_items)])
 
 
 func _on_hurtbox_component_hit(_damage_amount: int) -> void:
 	animated_sprite_2d.play("hit")
-	await animated_sprite_2d.animation_finished
-	animated_sprite_2d.play("idle")
-	if health_component.current_health == 0:
-		queue_free()
 
 
 func _on_health_component_health_depleted() -> void:
 	inventory_component.spawn_all_items(global_position)
+	for i in range(4):
+		var piece: BoxPiece = box_piece.instantiate()
+		Game.current_level.add_object(piece, global_position)
+	queue_free()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if health_component.current_health == 0:
+		return
+	animated_sprite_2d.play("idle")
