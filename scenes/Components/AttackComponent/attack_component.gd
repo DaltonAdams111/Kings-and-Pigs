@@ -28,6 +28,10 @@ var owner_collision: int = 0:
 @export_flags("Player:4", "Enemy:64", "Object:1024")
 var can_attack_collision: int = 0
 
+## The [CollisionShape2D] defining the attack area of the [AttackComponent].
+## This will default to the first child [CollisionShape2D].
+var attack_collision_shape: CollisionShape2D = null
+
 
 func _ready() -> void:
 	if owner_collision:
@@ -35,3 +39,19 @@ func _ready() -> void:
 	
 	if can_attack_collision:
 		collision_mask = can_attack_collision
+	
+	var children: Array[Node] = get_children()
+	for child in children:
+		if child is CollisionShape2D:
+			attack_collision_shape = child
+			return
+
+
+## Enables this [AttackComponent]'s [member attack_collision_shape].
+func enable() -> void:
+	attack_collision_shape.disabled = false
+
+
+## Enables this [AttackComponent]'s [member attack_collision_shape].
+func disable() -> void:
+	attack_collision_shape.disabled = true
