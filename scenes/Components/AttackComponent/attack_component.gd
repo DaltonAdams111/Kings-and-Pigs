@@ -32,6 +32,9 @@ var can_attack_collision: int = 0
 ## This will default to the first child [CollisionShape2D].
 var attack_collision_shape: CollisionShape2D = null
 
+## If [code]True[/code], this [AttackComponent]'s [member attack_collision_shape] is enabled.
+var is_enabled: bool = false
+
 
 func _ready() -> void:
 	if owner_collision:
@@ -44,14 +47,19 @@ func _ready() -> void:
 	for child in children:
 		if child is CollisionShape2D:
 			attack_collision_shape = child
-			return
+			break
+	
+	if attack_collision_shape:
+		is_enabled = not attack_collision_shape.disabled
 
 
 ## Enables this [AttackComponent]'s [member attack_collision_shape].
 func enable() -> void:
 	attack_collision_shape.disabled = false
+	is_enabled = true
 
 
 ## Enables this [AttackComponent]'s [member attack_collision_shape].
 func disable() -> void:
 	attack_collision_shape.disabled = true
+	is_enabled = false

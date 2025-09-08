@@ -3,10 +3,10 @@ class_name Box
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var floor_ray_cast: RayCast2D = $FloorRayCast
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var inventory_component: InventoryComponent = $InventoryComponent
+@onready var attack_component: AttackComponent = $AttackComponent
 
 @export var possible_items: Array[Item] = []
 @export var possible_number_of_items: int = 0
@@ -22,8 +22,11 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not floor_ray_cast.is_colliding():
-		sleeping = false
+	var velocity: Vector2 = linear_velocity.abs()
+	if velocity.x or velocity.y > 100:
+		attack_component.enable()
+	else:
+		attack_component.disable()
 
 
 func randomize_items() -> void:
@@ -47,3 +50,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if health_component.current_health == 0:
 		return
 	animated_sprite_2d.play("idle")
+
+
+func _on_attack_component_area_entered(_area: Area2D) -> void:
+	health_component.damage(health_component.MAX_HEALTH)

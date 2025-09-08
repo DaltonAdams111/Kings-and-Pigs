@@ -23,7 +23,7 @@ interactable = true
 target_level_path = "res://scenes/Levels/Level1/level_1.tscn"
 
 [node name="ObjectsLayer" parent="TileMapLayers" index="3"]
-tile_map_data = PackedByteArray("AAD7//7/AwAAAAAAAQD7//3/AwAAAAAAAQD+//7/AwAAAAAAAgABAP7/AwAAAAAAAgD+//z/AwAAAAAAAgD+//3/AwAAAAAAAgABAPz/AwAAAAAAAgABAP3/AwAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAD7//7/AwAAAAAAAQD7//3/AwAAAAAAAQD9//f/AwAAAAAAAgA=")
 
 [node name="EnemiesLayer" parent="TileMapLayers" index="5"]
 tile_map_data = PackedByteArray("AAAAAP3/BQAAAAAAAQA=")

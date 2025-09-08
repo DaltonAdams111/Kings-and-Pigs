@@ -45,10 +45,21 @@ func _ready() -> void:
 
 
 func _on_area_entered(area) -> void:
-	if area is AttackComponent and can_take_damage:
-		hit.emit(area.attack_damage)
-		can_take_damage = false
-		invulnerable_timer.start(invulnerable_time_sec)
+	if not can_take_damage:
+		return
+	
+	if not area is AttackComponent:
+		return
+	
+	var attack_component: AttackComponent = area as AttackComponent
+	
+	var is_attacked_by_attacker: bool = owner_collision & attack_component.can_attack_collision
+	if not is_attacked_by_attacker:
+		return
+	
+	hit.emit(attack_component.attack_damage)
+	can_take_damage = false
+	invulnerable_timer.start(invulnerable_time_sec)
 
 
 func _on_invulnerable_timer_timeout() -> void:
