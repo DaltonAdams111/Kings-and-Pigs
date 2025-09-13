@@ -22,8 +22,11 @@ position = Vector2(190.448, 34.943)
 interactable = true
 target_level_path = "res://scenes/Levels/Level1/level_1.tscn"
 
+[node name="DecorationsLayer" parent="TileMapLayers" index="2"]
+tile_map_data = PackedByteArray("AAD+//3/AgAAAAAAAQD///7/AgAAAAAAAQA=")
+
 [node name="ObjectsLayer" parent="TileMapLayers" index="3"]
-tile_map_data = PackedByteArray("AAD7//7/AwAAAAAAAQD7//3/AwAAAAAAAQD9//f/AwAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAD7//7/AwAAAAAAAQD7//3/AwAAAAAAAQA=")
 
 [node name="EnemiesLayer" parent="TileMapLayers" index="5"]
 tile_map_data = PackedByteArray("AAAAAP3/BQAAAAAAAQA=")

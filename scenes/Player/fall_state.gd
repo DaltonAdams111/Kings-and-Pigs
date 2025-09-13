@@ -38,7 +38,7 @@ func physics_update(delta: float) -> void:
 		change_state.emit("land")
 	elif Input.is_action_pressed("attack") and player.can_attack:
 		change_state.emit("attack")
-	elif Input.is_action_pressed("jump") and player.can_jump:
+	elif Input.is_action_just_pressed("jump") and player.can_jump:
 		change_state.emit("jump")
 	elif player.direction:
 		change_state.emit("run")

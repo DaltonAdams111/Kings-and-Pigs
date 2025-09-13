@@ -186,3 +186,7 @@ func update_health_ui() -> void:
 
 func _on_hurtbox_component_hit(_damage_amount: int) -> void:
 	state_machine.change_to_state("hit")
+
+
+func _on_health_component_health_depleted() -> void:
+	state_machine.change_to_state("dead")

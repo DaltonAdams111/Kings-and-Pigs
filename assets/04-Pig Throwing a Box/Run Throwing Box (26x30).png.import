@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqb41y6kohhvm"
-path="res://.godot/imported/Ground (26x20).png-b8e3ee7f60d519623fa711cca126c967.ctex"
+uid="uid://6iuccwf2xx64"
+path="res://.godot/imported/Run Throwing Box (26x30).png-912801cddc9b6aac5f6d046101bca683.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/06-Pig Hide in the Box/Ground (26x20).png"
-dest_files=["res://.godot/imported/Ground (26x20).png-b8e3ee7f60d519623fa711cca126c967.ctex"]
+source_file="res://assets/04-Pig Throwing a Box/Run Throwing Box (26x30).png"
+dest_files=["res://.godot/imported/Run Throwing Box (26x30).png-912801cddc9b6aac5f6d046101bca683.ctex"]
 
 [params]
 

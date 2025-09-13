@@ -55,11 +55,17 @@ func _ready() -> void:
 
 ## Enables this [AttackComponent]'s [member attack_collision_shape].
 func enable() -> void:
+	if not attack_collision_shape:
+		return
+	
 	attack_collision_shape.disabled = false
 	is_enabled = true
 
 
-## Enables this [AttackComponent]'s [member attack_collision_shape].
+## Disables this [AttackComponent]'s [member attack_collision_shape].
 func disable() -> void:
+	if not attack_collision_shape:
+		return
+	
 	attack_collision_shape.disabled = true
 	is_enabled = false

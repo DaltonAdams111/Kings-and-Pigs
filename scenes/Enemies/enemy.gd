@@ -22,6 +22,7 @@ enum Direction {
 @onready var object_collision_ray_cast: RayCast2D = $ObjectCollisionRayCast
 @onready var player_detection_area: Area2D = $PlayerDetectionArea
 @onready var player_detection_timer: Timer = $PlayerDetectionTimer
+@onready var player_collision_ray_cast: RayCast2D = $PlayerCollisionRayCast
 
 @export var movement_speed: float = 0.0
 @export var acceleration: float = 0.0
@@ -34,13 +35,14 @@ var direction: float = 0.0:
 			flip()
 var facing_direction: Direction = Direction.RIGHT
 
-@export var attack_cooldown: float = 1.0
+@export var attack_cooldown_sec: float = 1.0
 var can_attack: bool = true
 
 var target_position: Vector2
 @export var player_detection_timeout_sec: int = 0
 var player_detected: bool = false
 var player_position: Vector2
+var player_in_melee_range: bool = false
 
 
 func _process(_delta: float) -> void:
@@ -50,6 +52,8 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if player_detected:
 		player_position = Game.get_player().global_position
+	
+	player_in_melee_range = player_collision_ray_cast.is_colliding()
 
 
 func flip() -> void:
@@ -59,6 +63,8 @@ func flip() -> void:
 	attack_component.position.x = -attack_component.position.x
 	object_collision_ray_cast.target_position.x = -object_collision_ray_cast.target_position.x
 	player_detection_area.position.x = -player_detection_area.position.x
+	player_collision_ray_cast.target_position.x = -player_collision_ray_cast.target_position.x
+	player_collision_ray_cast.position.x = -player_collision_ray_cast.position.x
 
 
 func apply_gravity(delta: float, gravity_multiplier: float = 1.0):
@@ -128,3 +134,11 @@ func _on_hurtbox_component_hit(_damage_amount: int) -> void:
 func _on_health_component_health_depleted() -> void:
 	await animation_player.animation_finished
 	state_machine.change_to_state("dead")
+
+
+func _on_melee_detection_area_area_entered(_area: Area2D) -> void:
+	player_in_melee_range = true
+
+
+func _on_melee_detection_area_area_exited(_area: Area2D) -> void:
+	player_in_melee_range = false

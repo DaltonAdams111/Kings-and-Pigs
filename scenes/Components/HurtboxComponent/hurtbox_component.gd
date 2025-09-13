@@ -35,6 +35,8 @@ var owner_collision: int = 0:
 @export_flags("Player:2", "Enemy:32", "Object:512")
 var attacked_by_collision: int = 0
 
+var is_collision_enabled: bool = true
+
 
 func _ready() -> void:
 	if owner_collision:
@@ -45,6 +47,9 @@ func _ready() -> void:
 
 
 func _on_area_entered(area) -> void:
+	if not is_collision_enabled:
+		return
+	
 	if not can_take_damage:
 		return
 	

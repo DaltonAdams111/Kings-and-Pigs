@@ -633,7 +633,7 @@ one_shot = true
 collision_layer = 1024
 collision_mask = 546
 owner_collision = 1024
-attacked_by_collision = 546
+attacked_by_collision = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="1"]

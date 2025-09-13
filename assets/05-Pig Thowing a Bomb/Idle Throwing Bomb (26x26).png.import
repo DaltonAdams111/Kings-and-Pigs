@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dve3sfxf18qno"
-path="res://.godot/imported/Run (26x26).png-6a0ee5d0b614e4c2baa5cca2fd82286e.ctex"
+uid="uid://c3cp0a2x5t442"
+path="res://.godot/imported/Idle Throwing Bomb (26x26).png-a8c4b0eb7f7b78c023f13cfb1d26820f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/05-Pig Thowing a Bomb/Run (26x26).png"
-dest_files=["res://.godot/imported/Run (26x26).png-6a0ee5d0b614e4c2baa5cca2fd82286e.ctex"]
+source_file="res://assets/05-Pig Thowing a Bomb/Idle Throwing Bomb (26x26).png"
+dest_files=["res://.godot/imported/Idle Throwing Bomb (26x26).png-a8c4b0eb7f7b78c023f13cfb1d26820f.ctex"]
 
 [params]
 

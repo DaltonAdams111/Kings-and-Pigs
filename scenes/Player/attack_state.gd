@@ -30,7 +30,7 @@ func physics_update(delta: float) -> void:
 
 
 func on_animation_finished(_animation: String):
-	if Input.is_action_pressed("jump") and player.can_jump:
+	if Input.is_action_just_pressed("jump") and player.can_jump:
 		change_state.emit("jump")
 	elif player.is_falling:
 		change_state.emit("fall")

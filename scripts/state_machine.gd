@@ -61,8 +61,8 @@ func change_to_state(new_state_name: String, override: bool = false) -> void:
 	
 	if current_state:
 		current_state.exit()
+		previous_state = current_state
 	
 	new_state.enter()
 	
-	previous_state = current_state
 	current_state = new_state
