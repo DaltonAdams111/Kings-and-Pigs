@@ -45,6 +45,7 @@ func load_player() -> void:
 		player.queue_free()
 	
 	player = load(PLAYER_SCENE_PATH).instantiate()
+	player.player_died.connect(_on_player_died)
 	player_group.add_child(player)
 	
 
@@ -118,3 +119,7 @@ func _input(event: InputEvent) -> void:
 		pause_game()
 	else:
 		resume_game()
+
+
+func _on_player_died() -> void:
+	print("player died")

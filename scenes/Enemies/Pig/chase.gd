@@ -26,6 +26,7 @@ func physics_update(delta: float) -> void:
 	enemy.move(delta)
 	
 	if not enemy.player_detected:
+		enemy.dialogue_player.show_dialogue("WTF")
 		change_state.emit("wander")
 	
 	enemy.target_position = enemy.player_position

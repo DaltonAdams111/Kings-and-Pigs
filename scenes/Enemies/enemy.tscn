@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://r756311jbu85"]
+[gd_scene load_steps=10 format=3 uid="uid://r756311jbu85"]
 
 [ext_resource type="Script" uid="uid://ir8blxhrxm3p" path="res://scenes/Enemies/enemy.gd" id="1_8swre"]
 [ext_resource type="PackedScene" uid="uid://cgqwpfx18xvnh" path="res://scenes/Components/AttackComponent/attack_component.tscn" id="2_8swre"]
@@ -7,8 +7,9 @@
 [ext_resource type="Script" uid="uid://kjehr0uxxlhm" path="res://scenes/Components/InventoryComponent/item_slot.gd" id="3_uqsge"]
 [ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="4_dmeym"]
 [ext_resource type="PackedScene" uid="uid://6qvhtwtw8s0i" path="res://scenes/Components/InventoryComponent/inventory_component.tscn" id="5_0th86"]
+[ext_resource type="PackedScene" uid="uid://c3ypypx6i7duo" path="res://scenes/Components/DialoguePlayer/dialogue_player.tscn" id="8_dmeym"]
 
-[sub_resource type="Resource" id="Resource_uqsge"]
+[sub_resource type="Resource" id="Resource_dmeym"]
 resource_local_to_scene = true
 script = ExtResource("3_uqsge")
 item = ExtResource("4_dmeym")
@@ -36,7 +37,7 @@ one_shot = true
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_0th86")]
-inventory = Array[ExtResource("3_uqsge")]([SubResource("Resource_uqsge")])
+inventory = Array[ExtResource("3_uqsge")]([SubResource("Resource_dmeym")])
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("2_48hpc")]
 hurtbox = NodePath("../HurtboxComponent")
@@ -57,6 +58,7 @@ can_attack_collision = 4
 
 [node name="PlayerDetectionArea" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 7
 
 [node name="PlayerCollisionRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
@@ -69,9 +71,13 @@ collision_mask = 4352
 [node name="PlayerDetectionTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="DialoguePlayer" parent="." instance=ExtResource("8_dmeym")]
+
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]
+[connection signal="area_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_area_entered"]
+[connection signal="area_exited" from="PlayerDetectionArea" to="." method="_on_player_detection_area_area_exited"]
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_entered"]
 [connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_player_detection_area_body_exited"]
 [connection signal="timeout" from="PlayerDetectionTimer" to="." method="_on_player_detection_timer_timeout"]

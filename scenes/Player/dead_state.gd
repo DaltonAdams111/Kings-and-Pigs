@@ -12,7 +12,6 @@ func enter() -> void:
 		animation_player.animation_finished.connect(on_animation_finished)
 	
 	animation_player.speed_scale = 1
-	player.hurtbox_component.is_collision_enabled = false
 	animation_player.play("dead")
 
 
@@ -29,4 +28,4 @@ func physics_update(delta: float) -> void:
 
 
 func on_animation_finished(_animation: String):
-	pass
+	player.player_died.emit()

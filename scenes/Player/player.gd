@@ -5,7 +5,11 @@ class_name  Player
 ## Player Character
 
 
+@warning_ignore("unused_signal")
+signal player_died
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var floor_ray_cast: RayCast2D = $FloorRayCast
 @onready var door_ray_cast: RayCast2D = $DoorRayCast
 @onready var player_camera: PlayerCamera = $PlayerCamera
@@ -164,12 +168,7 @@ func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("test_action"):
 		return
 	
-	if inventory_component.is_empty:
-		return
-	
-	var item: Item = inventory_component.inventory[0].item
-	if item:
-		inventory_component.spawn_items(item, global_position + Vector2(0, -25))
+	health_component.damage(1)
 
 
 func _on_health_component_health_changed(_new_health: int) -> void:
@@ -184,9 +183,15 @@ func update_health_ui() -> void:
 	player_ui.update_hearts(health_component.current_health)
 
 
-func _on_hurtbox_component_hit(_damage_amount: int) -> void:
+func _on_hurtbox_component_hit(_damage_amount: int) -> void:	
 	state_machine.change_to_state("hit")
 
 
 func _on_health_component_health_depleted() -> void:
 	state_machine.change_to_state("dead")
+
+
+func _on_player_died() -> void:
+	collision_shape_2d.set_deferred("disabled", true)
+	hurtbox_component.disable_collision()
+	attack_component.disable()

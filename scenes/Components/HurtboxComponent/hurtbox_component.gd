@@ -69,3 +69,11 @@ func _on_area_entered(area) -> void:
 
 func _on_invulnerable_timer_timeout() -> void:
 	can_take_damage = true
+
+
+func enable_collision() -> void:
+	is_collision_enabled = true
+
+
+func disable_collision() -> void:
+	is_collision_enabled = false

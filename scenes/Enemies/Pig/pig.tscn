@@ -784,7 +784,7 @@ radius = 5.0
 height = 22.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f4qso"]
-size = Vector2(150, 30)
+size = Vector2(175, 30)
 
 [node name="Pig" instance=ExtResource("1_rye73")]
 script = ExtResource("2_fpadl")
@@ -856,8 +856,7 @@ disabled = true
 debug_color = Color(0.884243, 0.294058, 0.413057, 0.42)
 
 [node name="PlayerDetectionArea" parent="." index="9"]
-visible = false
-position = Vector2(50, -10)
+position = Vector2(70, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" index="0"]
 shape = SubResource("RectangleShape2D_f4qso")
@@ -869,5 +868,8 @@ target_position = Vector2(8, 0)
 [node name="ObjectCollisionRayCast" parent="." index="11"]
 position = Vector2(0, -5)
 target_position = Vector2(12, 0)
+
+[node name="DialoguePlayer" parent="." index="13"]
+position = Vector2(0, -24)
 
 [connection signal="timeout" from="StateMachine/Wander/IdleTimer" to="StateMachine/Wander" method="_on_idle_timer_timeout"]

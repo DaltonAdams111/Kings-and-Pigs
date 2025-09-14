@@ -16,6 +16,8 @@ func _ready() -> void:
 	if default_state:
 		change_to_state(default_state.name, true)
 	
+	player.player_died.connect(_on_player_died)
+	
 	set_process(false)
 	set_physics_process(false)
 
@@ -37,11 +39,13 @@ func _physics_process(delta: float) -> void:
 func enter() -> void:
 	set_process(true)
 	set_physics_process(true)
+	animation_player.active = true
 
 
 func exit() -> void:
 	set_process(false)
 	set_physics_process(false)
+	animation_player.active = false
 
 
 func update(_delta: float) -> void:
@@ -50,3 +54,7 @@ func update(_delta: float) -> void:
 
 func physics_update(_delta: float) -> void:
 	pass
+
+
+func _on_player_died() -> void:
+	exit()

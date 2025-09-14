@@ -23,6 +23,7 @@ enum Direction {
 @onready var player_detection_area: Area2D = $PlayerDetectionArea
 @onready var player_detection_timer: Timer = $PlayerDetectionTimer
 @onready var player_collision_ray_cast: RayCast2D = $PlayerCollisionRayCast
+@onready var dialogue_player: DialoguePlayer = $DialoguePlayer
 
 @export var movement_speed: float = 0.0
 @export var acceleration: float = 0.0
@@ -136,9 +137,10 @@ func _on_health_component_health_depleted() -> void:
 	state_machine.change_to_state("dead")
 
 
-func _on_melee_detection_area_area_entered(_area: Area2D) -> void:
-	player_in_melee_range = true
+func _on_player_detection_area_area_entered(_area: Area2D) -> void:
+	player_detected = true
+	player_detection_timer.stop()
 
 
-func _on_melee_detection_area_area_exited(_area: Area2D) -> void:
-	player_in_melee_range = false
+func _on_player_detection_area_area_exited(_area: Area2D) -> void:
+	player_detection_timer.start.call_deferred(player_detection_timeout_sec)

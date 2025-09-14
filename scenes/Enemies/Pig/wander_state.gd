@@ -34,6 +34,7 @@ func physics_update(delta: float) -> void:
 		idle_timer.start(IDLE_TIME_SEC)
 	
 	if enemy.player_detected:
+		enemy.dialogue_player.show_dialogue("Alert")
 		change_state.emit("chase")
 	
 
