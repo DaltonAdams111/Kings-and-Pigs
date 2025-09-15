@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://1ugy73nwvxc5"]
+
+[ext_resource type="Script" uid="uid://bo2kwvwov84wc" path="res://scenes/Components/InputLabel/input_label.gd" id="1_g0nri"]
+
+[node name="InputLabel" type="RichTextLabel"]
+offset_right = 149.0
+offset_bottom = 46.0
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 12
+fit_content = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 0
+script = ExtResource("1_g0nri")
+input_label_text = "Press %s to do this."
