@@ -1148,6 +1148,7 @@ collide_with_bodies = false
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+limit_enabled = false
 position_smoothing_enabled = true
 position_smoothing_speed = 16.0
 script = ExtResource("12_hxkm2")

@@ -16,6 +16,14 @@ func enter() -> void:
 	player.velocity.x = 0
 	player.player_camera.shake((player.fall_distance / player.FALL_DISTANCE_THRESHOLD) / 2, 5.0)
 	player.fall_distance = 0.0
+	
+	var collision = player.get_slide_collision(0).get_collider()
+	if collision is Box:
+		var box: Box = collision
+		box.collision_shape_2d.disabled = true
+		box.health_component.damage(2)
+		player.state_machine.change_to_state("fall")
+		player.velocity.y = 100
 
 
 func exit() -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://crq3qo30xtnc8"]
+[gd_scene load_steps=20 format=3 uid="uid://crq3qo30xtnc8"]
 
 [ext_resource type="PackedScene" uid="uid://ctd2t541124ln" path="res://scenes/Objects/PhysicsObject/physics_object.tscn" id="1_45827"]
 [ext_resource type="Script" uid="uid://cc4rh1ny11sop" path="res://scenes/Objects/Box/box.gd" id="2_afahl"]
 [ext_resource type="Texture2D" uid="uid://k3u3ag47hwp5" path="res://assets/08-Box/Hit.png" id="2_s0bql"]
+[ext_resource type="Script" uid="uid://kjehr0uxxlhm" path="res://scenes/Components/InventoryComponent/item_slot.gd" id="3_6wyao"]
 [ext_resource type="Texture2D" uid="uid://dahjg14x4dhte" path="res://assets/08-Box/Idle.png" id="3_afahl"]
 [ext_resource type="Script" uid="uid://ch4dqx37fiqlt" path="res://scenes/Components/InventoryComponent/item.gd" id="3_ax4so"]
 [ext_resource type="Resource" uid="uid://diwu3xd13q24r" path="res://resources/Items/diamond.tres" id="4_xfbio"]
@@ -61,6 +62,7 @@ size = Vector2(21, 16)
 physics_material_override = SubResource("PhysicsMaterial_xfbio")
 can_sleep = false
 script = ExtResource("2_afahl")
+guaranteed_items = Array[ExtResource("3_6wyao")]([])
 possible_items = Array[ExtResource("3_ax4so")]([ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("4_xfbio"), ExtResource("5_f3j4a")])
 possible_number_of_items = 2
 

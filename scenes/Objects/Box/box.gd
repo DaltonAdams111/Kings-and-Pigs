@@ -2,11 +2,14 @@ extends PhysicsObject
 class_name Box
 
 
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var inventory_component: InventoryComponent = $InventoryComponent
 @onready var attack_component: AttackComponent = $AttackComponent
+
+@export var guaranteed_items: Array[ItemSlot] = []
 
 @export var possible_items: Array[Item] = []
 @export var possible_number_of_items: int = 0
@@ -18,6 +21,9 @@ const box_piece: PackedScene = preload("res://scenes/Objects/Box/box_piece.tscn"
 func _ready() -> void:
 	number_of_items = randi_range(0, possible_number_of_items)
 	randomize_items()
+	
+	for itemslot: ItemSlot in guaranteed_items:
+		inventory_component.add_item(itemslot.item, itemslot.item_count)
 	inventory_component.consolidate_items()
 
 
